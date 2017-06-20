@@ -24,11 +24,13 @@ public class GoEsteticaContract {
                 .build();
 
         public static final String TABLE_NAME = "customer";
-
         public static final String COLUMN_CUSTOMER_ID = "customer_id";
         public static final String COLUMN_CUSTOMER_NAME = "name";
         public static final String COLUMN_CUSTOMER_FONE = "fone";
         public static final String COLUMN_CUSTOMER_CELLPHONE = "cellphone";
+        public static final String COLUMN_CUSTOMER_PHOTO = "photo";
+        public static final String COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE = "payment_type";
+
 
     }
 
@@ -40,7 +42,11 @@ public class GoEsteticaContract {
 
 
         public static final String TABLE_NAME = "treatment";
-
+        public static final String COLUMN_TREATMENT_ID = "treatment_id";
+        public static final String COLUMN_TREATMENT_NAME = "name";
+        public static final String COLUMN_TREATMENT_DESCRIPTION = "description";
+        public static final String COLUMN_TREATMENT_PRICE = "price";
+        public static final String COLUMN_TREATMENT_SESSIONS = "sessions";
 
 
     }
@@ -51,8 +57,16 @@ public class GoEsteticaContract {
                 .appendPath(PATH_SCHEDULE)
                 .build();
 
-
         public static final String TABLE_NAME = "schedule";
+        public static final String COLUMN_SCHEDULE_ID = "schedule_id";
+        public static final String COLUMN_SCHEDULE_CUSTOMER_ID = "customer_id";
+        public static final String COLUMN_SCHEDULE_TREATMENT_ID = "treatment_id";
+        public static final String COLUMN_SCHEDULE_SESSIONS = "sessions";
+        public static final String COLUMN_SCHEDULE_PRICE = "price";
+        public static final String COLUMN_SCHEDULE_DATE = "date";
+        public static final String COLUMN_SCHEDULE_START_HOUR = "start_hour";
+        public static final String COLUMN_SCHEDULE_SESSION_MINUTES = "session_minutes";
+
 
 
     }
