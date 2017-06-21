@@ -19,6 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".database.GoEsteticaContentProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/login" />
+
+
+
     </application>
 
 </manifest>

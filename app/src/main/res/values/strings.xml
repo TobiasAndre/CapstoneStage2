@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GoEstetica</string>
+    <string name="login">GoEstetica - Login</string>
+    <string name="google_account">Utilize sua conta do Google</string>
+    <string name="content_authority">com.tobiasandre.goestetica</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+
 </resources>
