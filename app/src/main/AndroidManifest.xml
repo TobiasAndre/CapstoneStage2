@@ -27,10 +27,10 @@
 
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/login" />
-
-
-
+            android:label="@string/login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ImportContactsActivity"></activity>
+        <activity android:name=".ui.SettingsActivity"></activity>
     </application>
 
 </manifest>

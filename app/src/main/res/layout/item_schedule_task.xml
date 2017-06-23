@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center|center_horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_customer"
+                    android:src="@mipmap/ic_profile"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_nm_customer"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:hint="Katiucia Terra Tremea"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="match_parent"
+                    android:alpha="0.5"
+                    android:background="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_hr_schedule"
+                    android:text="07:30"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_tp_treatment"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12sp"
+                    android:text="Facial"
+                    android:textStyle="italic"
+                    android:textColor="@color/deep_purple"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_nm_treatment"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="3"
+                    android:textSize="10sp"
+                    android:text="Limpeza de Pele"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_time_treatment"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/orange"
+                        android:text="1h30"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_confirmation"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/green"
+                        android:text="Confirmado!"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_qt_session"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="end|bottom"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        android:textColor="@color/indigo"
+                        android:text="Sessão: 1/2"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_vl_session"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="end|bottom"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        android:textColor="@color/red"
+                        android:text="Valor: R$ 0,00"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="bottom"
+            android:alpha="0.5"
+            android:background="@android:color/darker_gray" />
+
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>

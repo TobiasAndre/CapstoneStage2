@@ -1,9 +1,32 @@
 <resources>
-    <string name="app_name">GoEstetica</string>
+    <string name="app_name" translatable="false">GoEstetica</string>
     <string name="login">GoEstetica - Login</string>
     <string name="google_account">Utilize sua conta do Google</string>
     <string name="content_authority">com.tobiasandre.goestetica</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="wellcome">Seja Bem Vindo, %s!</string>
+    <string name="take_schedule">Adicione um Agendamento...</string>
+    <string name="retry">Tentar Novamente</string>
+    <string name="error_login">Erro ao Efetuar o Login:</string>
+
+    <string name="general_error">Erro :</string>
+    <string name="find">Pesquisa</string>
+
+    <string name="scheduling">Agendamentos</string>
+    <string name="treatments">Tratamentos</string>
+    <string name="customers">Clientes</string>
+    <string name="schedule">Agendar</string>
+    <string name="reports">Relatorios \\ Graficos</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>@string/scheduling</item>
+        <item>@string/customers</item>
+        <item>@string/treatments</item>
+        <item>@string/schedule</item>
+        <item>@string/reports</item>
+
+    </string-array>
 
 
 </resources>
