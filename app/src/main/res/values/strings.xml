@@ -9,6 +9,7 @@
     <string name="take_schedule">Adicione um Agendamento...</string>
     <string name="retry">Tentar Novamente</string>
     <string name="error_login">Erro ao Efetuar o Login:</string>
+    <string name="read_contacts">Lendo Lista de Contatos</string>
 
     <string name="general_error">Erro :</string>
     <string name="find">Pesquisa</string>
