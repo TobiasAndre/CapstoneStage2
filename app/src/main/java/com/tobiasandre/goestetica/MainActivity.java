@@ -1,6 +1,7 @@
 package com.tobiasandre.goestetica;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tobiasandre.goestetica.ui.CustomerFragment;
 import com.tobiasandre.goestetica.ui.HomeFragment;
+import com.tobiasandre.goestetica.ui.ImportContactsActivity;
 import com.tobiasandre.goestetica.ui.LoginActivity;
 import com.tobiasandre.goestetica.ui.ReportFragment;
 import com.tobiasandre.goestetica.ui.ScheduleFragment;
@@ -40,10 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mTitle;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         mView = (View)findViewById(R.id.drawer_layout);
         mAuth = FirebaseAuth.getInstance();
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         initMenu();
 
         selectItem(0);
+
 
     }
 

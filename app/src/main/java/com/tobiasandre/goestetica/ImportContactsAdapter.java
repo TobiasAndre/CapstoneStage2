@@ -51,15 +51,25 @@ public class ImportContactsAdapter extends RecyclerView.Adapter<ImportContactsAd
         final Context context = holder.mView.getContext();
 
         holder.mContact = contact;
-        holder.mName.setText(contact.getName());
-        holder.mPhone.setText(contact.getNrPhone());
-        holder.mEmail.setText(contact.getEmail());
+        holder.mName.setText(contact.getName().trim());
+        holder.mPhone.setText(contact.getNrPhone().trim());
+        holder.mEmail.setText(contact.getEmail().trim());
         holder.mFoto.setImageBitmap(contact.getFoto());
-
+        holder.mContact.setImported(holder.mContact.getImported()==true);
+        if(!holder.mContact.getImported()){
+            holder.mChecked.setVisibility(View.GONE);
+        }
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCallbacks.open(contact, holder.getAdapterPosition());
+                holder.mContact.setImported(!holder.mContact.getImported()? true :false);
+                if(!holder.mContact.getImported()){
+                    holder.mChecked.setVisibility(View.GONE);
+                }else{
+                    holder.mChecked.setVisibility(View.VISIBLE);
+                }
+
             }
         });
     }
@@ -78,7 +88,7 @@ public class ImportContactsAdapter extends RecyclerView.Adapter<ImportContactsAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         TextView mName,mPhone,mEmail;
-        ImageView mFoto;
+        ImageView mFoto,mChecked;
 
         public Contact mContact;
 
@@ -88,6 +98,7 @@ public class ImportContactsAdapter extends RecyclerView.Adapter<ImportContactsAd
             mPhone = (TextView)view.findViewById(R.id.tv_phone_number);
             mEmail = (TextView)view.findViewById(R.id.tv_email_address);
             mFoto = (ImageView)view.findViewById(R.id.img_contact);
+            mChecked = (ImageView)view.findViewById(R.id.img_checked);
             mView = view;
         }
 

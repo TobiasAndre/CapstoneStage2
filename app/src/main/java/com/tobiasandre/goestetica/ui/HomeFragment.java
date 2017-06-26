@@ -1,6 +1,8 @@
 package com.tobiasandre.goestetica.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tobiasandre.goestetica.MainActivity;
 import com.tobiasandre.goestetica.R;
 
 /**
@@ -17,11 +20,24 @@ import com.tobiasandre.goestetica.R;
 public class HomeFragment extends Fragment {
 
     private static String TAG = HomeFragment.class.getSimpleName();
+    FloatingActionButton btnAdd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.fragment_init, container, false);
 
-        View rootView = inflater.inflate(R.layout.fragment_init, container, false);
+        btnAdd = (FloatingActionButton)rootView.findViewById(R.id.fab_add_scheduling);
+
+        if(btnAdd!=null) {
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), ImportContactsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
         return rootView;
     }
 

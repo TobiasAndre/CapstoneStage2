@@ -10,6 +10,12 @@
     <string name="retry">Tentar Novamente</string>
     <string name="error_login">Erro ao Efetuar o Login:</string>
     <string name="read_contacts">Lendo Lista de Contatos</string>
+    <string name="contact_name">Nome:</string>
+    <string name="contact_phone">Telefone:</string>
+    <string name="contact_email">Email:</string>
+    <string name="contact_photo">Foto</string>
+    <string name="checked">Marcado</string>
+    <string name="import_contacts">Importar contatos</string>
 
     <string name="general_error">Erro :</string>
     <string name="find">Pesquisa</string>

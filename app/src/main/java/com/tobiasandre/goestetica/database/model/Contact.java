@@ -13,6 +13,7 @@ public class Contact {
     private String nrPhone;
     private String email;
     private Bitmap foto;
+    private Boolean imported;
 
     public int getId() {
         return id;
@@ -23,6 +24,9 @@ public class Contact {
     }
 
     public String getName() {
+        if(name==null){
+            name="";
+        }
         return name;
     }
 
@@ -31,6 +35,9 @@ public class Contact {
     }
 
     public String getNrPhone() {
+        if(nrPhone==null){
+            nrPhone="";
+        }
         return nrPhone;
     }
 
@@ -47,10 +54,21 @@ public class Contact {
     }
 
     public String getEmail() {
+        if(email==null){
+            email="";
+        }
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getImported() {
+        return imported;
+    }
+
+    public void setImported(Boolean imported) {
+        this.imported = imported;
     }
 }
