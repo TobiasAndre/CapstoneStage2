@@ -21,6 +21,9 @@
     <!--style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"-->
 
 
+    <style name="ExpandedTitleTextAppearance" parent="@android:style/TextAppearance.Large">
+        <item name="android:textStyle">bold</item>
+    </style>
 
 
 </resources>

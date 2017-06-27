@@ -30,6 +30,19 @@ public class GoEsteticaContract {
         public static final String COLUMN_CUSTOMER_CELLPHONE = "cellphone";
         public static final String COLUMN_CUSTOMER_PHOTO = "photo";
         public static final String COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE = "payment_type";
+        public static final String COLUMN_CUSTOMER_EMAIL = "email";
+
+        public static final String DEFAULT_SORT = COLUMN_CUSTOMER_NAME;
+
+        /** Matches: /items/ */
+        public static Uri buildDirUri() {
+            return BASE_CONTENT_URI.buildUpon().appendPath("customer").build();
+        }
+
+        /** Matches: /items/[_id]/ */
+        public static Uri buildItemUri(long _id) {
+            return BASE_CONTENT_URI.buildUpon().appendPath("customer").appendPath(Long.toString(_id)).build();
+        }
 
 
     }
