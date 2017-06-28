@@ -16,9 +16,17 @@
     <string name="contact_photo">Foto</string>
     <string name="checked">Marcado</string>
     <string name="import_contacts">Importar contatos</string>
-
+    <string name="customer_name">Nome :</string>
+    <string name="customer_phone">Fone Fixo :</string>
+    <string name="customer_cellphone">Celular :</string>
+    <string name="customer_email">Email :</string>
+    <string name="customer_address">Endereço :</string>
+    <string name="customer_default_payment">Pagamento:</string>
     <string name="general_error">Erro :</string>
     <string name="find">Pesquisa</string>
+
+    <string name="credit_card">Cartao de Credito</string>
+    <string name="money">Dinheiro</string>
 
     <string name="scheduling">Agendamentos</string>
     <string name="treatments">Tratamentos</string>
@@ -26,13 +34,20 @@
     <string name="schedule">Agendar</string>
     <string name="reports">Relatorios \\ Graficos</string>
 
+    <!-- SnackBar -->
+    <string name="required_field">Campo Obrigatório!</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>@string/scheduling</item>
         <item>@string/customers</item>
         <item>@string/treatments</item>
         <item>@string/schedule</item>
         <item>@string/reports</item>
+    </string-array>
 
+    <string-array name="payment_types">
+        <item>@string/money</item>
+        <item>@string/credit_card</item>
     </string-array>
 
 

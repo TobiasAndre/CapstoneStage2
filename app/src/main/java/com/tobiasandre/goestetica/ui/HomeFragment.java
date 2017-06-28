@@ -46,6 +46,8 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.menu, menu);
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();

@@ -29,6 +29,7 @@ public class GoEsteticaContract {
         public static final String COLUMN_CUSTOMER_FONE = "fone";
         public static final String COLUMN_CUSTOMER_CELLPHONE = "cellphone";
         public static final String COLUMN_CUSTOMER_PHOTO = "photo";
+        public static final String COLUMN_CUSTOMER_ADDRESS = "address";
         public static final String COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE = "payment_type";
         public static final String COLUMN_CUSTOMER_EMAIL = "email";
 

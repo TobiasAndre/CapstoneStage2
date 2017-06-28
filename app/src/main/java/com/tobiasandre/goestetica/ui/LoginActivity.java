@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
+
     @Override
     public void onStart() {
         super.onStart();

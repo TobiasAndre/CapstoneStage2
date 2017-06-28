@@ -33,7 +33,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
 
         final String SQL_CREATE_TREATMENT_TABLE =
                 " CREATE TABLE "+ GoEsteticaContract.TreatmentEntry.TABLE_NAME + " ( "+
-                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    GoEsteticaContract.TreatmentEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME + " STRING NOT NULL, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION + " STRING NOT NULL, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE + " NUMERIC NOT NULL, "+
@@ -43,7 +43,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
 
         final String SQL_CREATE_SCHEDULE_TABLE =
                 " CREATE TABLE "+GoEsteticaContract.ScheduleEntry.TABLE_NAME + " ( "+
-                        GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        GoEsteticaContract.ScheduleEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID + " INTEGER NOT NULL,"+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_TREATMENT_ID + " INTEGER NOT NULL,"+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " DATE NOT NULL,"+
