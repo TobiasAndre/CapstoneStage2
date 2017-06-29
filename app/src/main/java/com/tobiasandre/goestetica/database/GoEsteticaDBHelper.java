@@ -26,6 +26,8 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                         GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE + " STRING ,"+
                         GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE + " STRING ,"+
                         GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE + " STRING ,"+
+                        GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL+" STRING ,"+
+                        GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS+" STRING,"+
                         GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO + " STRING,"+
                 " UNIQUE (" + GoEsteticaContract.CustomerEntry._ID + ") ON CONFLICT REPLACE);";
 

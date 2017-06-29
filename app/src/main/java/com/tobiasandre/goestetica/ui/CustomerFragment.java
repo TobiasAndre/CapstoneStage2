@@ -4,9 +4,14 @@ package com.tobiasandre.goestetica.ui;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.tobiasandre.goestetica.R;
+import com.tobiasandre.goestetica.database.GoEsteticaContentProvider;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
+import com.tobiasandre.goestetica.database.GoEsteticaDBHelper;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.io.ByteArrayOutputStream;
@@ -75,8 +82,15 @@ public class CustomerFragment extends Fragment {
 
         }
 
+
+        Intent intentListCustomer = new Intent(rootView.getContext(),CustomerListActivity.class);
+        startActivity(intentListCustomer);
+
+
         return rootView;
     }
+
+
 
     private void validateRequired(){
         if(edCustomerName.getText().toString().isEmpty()){
@@ -97,7 +111,7 @@ public class CustomerFragment extends Fragment {
 
             savePhoto(bitmap, idCustomerPhoto);
 
-            ContentValues[] customerValues = new ContentValues[5];
+            ContentValues[] customerValues = new ContentValues[1];
             ContentValues value = new ContentValues();
             value.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME, edCustomerName.getText().toString());
             value.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE, edCustomerCellPhone.getText().toString());

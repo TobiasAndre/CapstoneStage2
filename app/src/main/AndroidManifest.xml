@@ -28,11 +28,13 @@
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/login"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ImportContactsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ImportContactsActivity"
             android:label="@string/import_contacts"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.SettingsActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.SettingsActivity" />
+        <activity android:name=".ui.CustomerListActivity"></activity>
     </application>
 
 </manifest>
