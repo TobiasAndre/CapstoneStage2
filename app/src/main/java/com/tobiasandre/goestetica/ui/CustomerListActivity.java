@@ -69,18 +69,24 @@ public class CustomerListActivity extends AppCompatActivity implements
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
 
         Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
-        return new CursorLoader(CustomerListActivity.this,contentUri,MAIN_CUSTOMER_PROJECTION,null,null,null);
+        return new CursorLoader(CustomerListActivity.this,contentUri,null,null,null,null);
 
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        int rows = data.getCount();
         if(mCustomerAdapter!=null && data!=null) {
             mCustomerAdapter.swapCursor(data);
 
-            if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
+            if (mPosition == RecyclerView.NO_POSITION)
+                mPosition = 0;
+
             mRecyclerView.smoothScrollToPosition(mPosition);
-            if (data.getCount() != 0) showCustomerDataView();
+            if (data.getCount() != 0)
+                showCustomerDataView();
+
         }else{
             Log.v(TAG,"OnLoadFinished: mAdapter is null");
         }

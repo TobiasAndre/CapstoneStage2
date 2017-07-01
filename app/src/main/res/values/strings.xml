@@ -34,6 +34,11 @@
     <string name="schedule">Agendar</string>
     <string name="reports">Relatorios \\ Graficos</string>
 
+    <string name="treatment_name">Tratamento : </string>
+    <string name="treatment_description">Descrição :</string>
+    <string name="treatment_price">Valor :</string>
+
+
     <!-- SnackBar -->
     <string name="required_field">Campo Obrigatório!</string>
 

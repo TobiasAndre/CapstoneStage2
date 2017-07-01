@@ -34,7 +34,8 @@
             android:label="@string/import_contacts"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.SettingsActivity" />
-        <activity android:name=".ui.CustomerListActivity"></activity>
+        <activity android:name=".ui.CustomerListActivity" />
+        <activity android:name=".ui.TreatmentListActivity"></activity>
     </application>
 
 </manifest>
