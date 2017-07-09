@@ -1,5 +1,7 @@
 package com.tobiasandre.goestetica.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.LoaderManager;
@@ -19,11 +21,12 @@ import com.tobiasandre.goestetica.ui.Adapter.CustomerAdapter;
 
 public class CustomerListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,
-        CustomerAdapter.CustomerAdapterOnClickHandler {
+        CustomerAdapter.Callbacks {
 
     public static final String TAG = CustomerListActivity.class.getSimpleName();
     public static final int ID_CUSTOMER_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
+    Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
 
     public static final String[] MAIN_CUSTOMER_PROJECTION = {
             GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME,
@@ -67,10 +70,7 @@ public class CustomerListActivity extends AppCompatActivity implements
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-
-        Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
         return new CursorLoader(CustomerListActivity.this,contentUri,null,null,null,null);
-
     }
 
     @Override
@@ -100,11 +100,6 @@ public class CustomerListActivity extends AppCompatActivity implements
             Log.v(TAG,"OnLoadFinished: mAdapter is null");
     }
 
-    @Override
-    public void onClick(long id) {
-
-    }
-
     private void showLoading() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
@@ -113,5 +108,17 @@ public class CustomerListActivity extends AppCompatActivity implements
     private void showCustomerDataView() {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void open(int position) {
+        Intent data = new Intent();
+        data.putExtra("id",position);
+        if (getParent() == null) {
+            setResult(Activity.RESULT_OK, data);
+        } else {
+            getParent().setResult(Activity.RESULT_OK, data);
+        }
+        finish();
     }
 }

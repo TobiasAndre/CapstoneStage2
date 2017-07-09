@@ -113,7 +113,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         GoEsteticaContract.CustomerEntry.TABLE_NAME,
                         projection,
-                        GoEsteticaContract.CustomerEntry._ID + " = ? " ,
+                        selection ,
                         selectionArgs,
                         null,
                         null,

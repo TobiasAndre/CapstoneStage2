@@ -23,6 +23,7 @@
     <string name="customer_address">Endereço :</string>
     <string name="customer_default_payment">Pagamento:</string>
     <string name="general_error">Erro :</string>
+    <string name="save_sucess">Registro Salvo com Sucesso!</string>
     <string name="find">Pesquisa</string>
 
     <string name="credit_card">Cartao de Credito</string>
