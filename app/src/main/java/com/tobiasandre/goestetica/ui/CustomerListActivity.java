@@ -1,6 +1,8 @@
 package com.tobiasandre.goestetica.ui;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -27,16 +30,7 @@ public class CustomerListActivity extends AppCompatActivity implements
     public static final int ID_CUSTOMER_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
     Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
-
-    public static final String[] MAIN_CUSTOMER_PROJECTION = {
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE,
-            GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE
-    };
+    SearchView searchView;
 
     private CustomerAdapter mCustomerAdapter;
     private RecyclerView mRecyclerView;
@@ -62,21 +56,53 @@ public class CustomerListActivity extends AppCompatActivity implements
 
         mRecyclerView.setAdapter(mCustomerAdapter);
 
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView=(SearchView) findViewById(R.id.search_customers);
+        searchView.setFocusable(true);// searchView is null
+        searchView.setFocusableInTouchMode(true);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                restartLoader(newText);
+                return false;
+            }
+        });
+
         showLoading();
 
         getSupportLoaderManager().initLoader(ID_CUSTOMER_LOADER, null, this);
 
     }
 
+    private void restartLoader(String vWhere){
+
+        Bundle bundle = new Bundle();
+        bundle.putString("filter",vWhere);
+
+        getSupportLoaderManager().restartLoader(ID_CUSTOMER_LOADER,bundle,this);
+    }
+
+
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-        return new CursorLoader(CustomerListActivity.this,contentUri,null,null,null,null);
+        String filter = "";
+        if(bundle!=null){
+            filter = bundle.getString("filter");
+        }
+        filter = GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME + " like '%"+filter+"%' ";
+        return new CursorLoader(CustomerListActivity.this,contentUri,null,filter,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-        int rows = data.getCount();
         if(mCustomerAdapter!=null && data!=null) {
             mCustomerAdapter.swapCursor(data);
 

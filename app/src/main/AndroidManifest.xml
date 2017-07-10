@@ -45,8 +45,12 @@
             android:name=".ui.ImportContactsActivity"
             android:label="@string/import_contacts"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.SettingsActivity" />
-        <activity android:name=".ui.CustomerListActivity" />
+
+        <activity android:name=".ui.SettingsActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".ui.CustomerListActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".ui.TreatmentListActivity"></activity>
     </application>
 

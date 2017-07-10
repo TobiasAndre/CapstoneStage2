@@ -224,9 +224,21 @@ public class CustomerFragment extends Fragment {
             ContentResolver customerContentResolver = this.getContext().getContentResolver();
 
             if(idCustomer > 0) {
-                /*customerContentResolver.update(
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME,edCustomerName.getText().toString());
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO,imagePath);
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE,edCustomerPhone.getText().toString());
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE,edCustomerCellPhone.getText().toString());
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS,edCustomerAddress.getText().toString());
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL,edCustomerEmail.getText().toString());
+                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE,spnDefaultPaymentType.getSelectedItem().toString());
+
+                String selectionClause = GoEsteticaContract.CustomerEntry._ID + " = ?";
+                String[] selectionArgs = new String[]{String.valueOf(idCustomer)};
+                customerContentResolver.update(
                         GoEsteticaContract.CustomerEntry.CONTENT_URI,
-                        customerValues,null,null);*/
+                        contentValues,selectionClause,selectionArgs);
+
             }else{
                 customerContentResolver.bulkInsert(
                         GoEsteticaContract.CustomerEntry.CONTENT_URI,

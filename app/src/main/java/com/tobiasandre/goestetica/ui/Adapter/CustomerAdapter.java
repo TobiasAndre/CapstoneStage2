@@ -85,6 +85,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         notifyDataSetChanged();
     }
 
+    public void filterRecyclerView(String charText){
+        charText = charText.toLowerCase();
+
+
+        notifyDataSetChanged();
+    }
+
     class CustomerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         int idCadastro = 0;
