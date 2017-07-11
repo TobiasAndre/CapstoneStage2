@@ -1,10 +1,14 @@
 package com.tobiasandre.goestetica;
 
+import android.*;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +37,7 @@ import com.tobiasandre.goestetica.ui.drawer.DrawerItemCustomAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int MY_STORAGE_WRITE_REQUEST_CODE = 102;
     final private String TAG = MainActivity.class.getSimpleName();
     private View mView;
     FirebaseAuth mAuth;
@@ -49,7 +54,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
 
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+            }
+
+            ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_STORAGE_WRITE_REQUEST_CODE);
+        }
 
         mView = (View)findViewById(R.id.drawer_layout);
         mAuth = FirebaseAuth.getInstance();

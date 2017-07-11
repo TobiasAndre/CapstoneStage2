@@ -106,15 +106,20 @@ public class CustomerListActivity extends AppCompatActivity implements
         if(mCustomerAdapter!=null && data!=null) {
             mCustomerAdapter.swapCursor(data);
 
-            if (mPosition == RecyclerView.NO_POSITION)
+            if (mPosition == RecyclerView.NO_POSITION){
                 mPosition = 0;
+            }
 
             mRecyclerView.smoothScrollToPosition(mPosition);
-            if (data.getCount() != 0)
+            if (data.getCount() != 0) {
                 showCustomerDataView();
-
+            }else{
+                showCustomerDataView();
+                finish();
+            }
         }else{
             Log.v(TAG,"OnLoadFinished: mAdapter is null");
+            showCustomerDataView();
         }
     }
 
@@ -122,8 +127,10 @@ public class CustomerListActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         if(mCustomerAdapter!=null)
             mCustomerAdapter.swapCursor(null);
-        else
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
+        else {
+            Log.v(TAG, "OnLoadFinished: mAdapter is null");
+            showCustomerDataView();
+        }
     }
 
     private void showLoading() {

@@ -56,7 +56,6 @@ public class GoEsteticaContract {
 
 
         public static final String TABLE_NAME = "treatment";
-        public static final String COLUMN_TREATMENT_ID = "treatment_id";
         public static final String COLUMN_TREATMENT_NAME = "name";
         public static final String COLUMN_TREATMENT_DESCRIPTION = "description";
         public static final String COLUMN_TREATMENT_PRICE = "price";
@@ -72,7 +71,6 @@ public class GoEsteticaContract {
                 .build();
 
         public static final String TABLE_NAME = "schedule";
-        public static final String COLUMN_SCHEDULE_ID = "schedule_id";
         public static final String COLUMN_SCHEDULE_CUSTOMER_ID = "customer_id";
         public static final String COLUMN_SCHEDULE_TREATMENT_ID = "treatment_id";
         public static final String COLUMN_SCHEDULE_SESSIONS = "sessions";

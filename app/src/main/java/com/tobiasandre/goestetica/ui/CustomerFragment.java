@@ -8,17 +8,21 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +38,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
+import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +59,9 @@ import static android.app.Activity.RESULT_OK;
 public class CustomerFragment extends Fragment {
 
     private static String TAG = CustomerFragment.class.getSimpleName();
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
+
     public  static final int RequestPermissionCode  = 1 ;
     private int idCustomer=-1;
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -78,6 +86,27 @@ public class CustomerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_customer, container, false);
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+
+        if(ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED){
+
+            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.CAMERA)){
+
+            }
+
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA},
+                    MY_CAMERA_REQUEST_CODE);
+        }
 
         edCustomerName = (EditText)rootView.findViewById(R.id.ed_customer_name);
         edCustomerPhone = (EditText)rootView.findViewById(R.id.ed_customer_phone);
@@ -90,13 +119,23 @@ public class CustomerFragment extends Fragment {
         customerPhoto = (ImageView)rootView.findViewById(R.id.photo);
         btnAddPhoto = (FloatingActionButton)rootView.findViewById(R.id.fab_add_photo);
 
+        if(findCustomerButton!=null){
+            findCustomerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentListCustomer = new Intent(rootView.getContext(),CustomerListActivity.class);
+                    startActivityForResult(intentListCustomer,3);
+                }
+            });
+        }
+
         if(saveButton!=null){
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    validateRequired();
-
-                    saveValues();
+                    if(validateRequired()) {
+                        saveValues();
+                    }
                 }
             });
         }
@@ -121,12 +160,35 @@ public class CustomerFragment extends Fragment {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == RESULT_OK) {
-
             ImageCropFunction();
-
         }
         else if(requestCode ==2){
             uri = data.getData();
@@ -186,21 +248,20 @@ public class CustomerFragment extends Fragment {
         }
     }
 
-    private void validateRequired(){
+    private Boolean validateRequired(){
         if(edCustomerName.getText().toString().isEmpty()){
-            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)));
-            return;
+            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)),TYPE_SNACKBAR.ERROR);
+            return false;
         }
         if(edCustomerCellPhone.getText().toString().isEmpty()){
-            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)));
-            return;
+            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)),TYPE_SNACKBAR.ERROR);
+            return false;
         }
+        return true;
     }
 
     private void saveValues(){
         try {
-
-
 
             customerPhoto.buildDrawingCache();
 
@@ -245,13 +306,15 @@ public class CustomerFragment extends Fragment {
                         customerValues);
             }
 
-            Util.showLongSnackBar(rootView, getString(R.string.save_sucess));
+
+            Util.makeSnackbar(rootView,getString(R.string.save_sucess), Snackbar.LENGTH_LONG, Color.GREEN,Color.BLACK).show();
+
+            //Util.showLongSnackBar(rootView, getString(R.string.save_sucess), TYPE_SNACKBAR.SUCCESS);
 
             ClearFields();
 
-
         }catch (Exception error){
-            Util.showLongSnackBar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()));
+            Util.showLongSnackBar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),TYPE_SNACKBAR.ERROR);
         }
     }
 
