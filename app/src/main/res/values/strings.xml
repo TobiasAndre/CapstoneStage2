@@ -25,6 +25,7 @@
     <string name="general_error">Erro :</string>
     <string name="save_sucess">Registro Salvo com Sucesso!</string>
     <string name="customer_required">É Necessário Informar o Nome do Cliente!</string>
+    <string name="treatment_name_required">É Necessário Informar o nome do Tratamento!</string>
     <string name="find">Pesquisa</string>
 
     <string name="credit_card">Cartao de Credito</string>

@@ -37,9 +37,9 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                 " CREATE TABLE "+ GoEsteticaContract.TreatmentEntry.TABLE_NAME + " ( "+
                     GoEsteticaContract.TreatmentEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME + " STRING NOT NULL, "+
-                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION + " STRING NOT NULL, "+
-                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE + " NUMERIC NOT NULL, "+
-                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS + " INTEGER NOT NULL, "+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION + " STRING, "+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE + " NUMERIC, "+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS + " INTEGER, "+
                 " UNIQUE (" + GoEsteticaContract.TreatmentEntry._ID + ") ON CONFLICT REPLACE);";
         db.execSQL(SQL_CREATE_TREATMENT_TABLE);
 
@@ -53,7 +53,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE + " NUMERIC NOT NULL, "+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR + " STRING NOT NULL,"+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES + " INTEGER NOT NULL,"+
-                " UNIQUE (" + GoEsteticaContract.TreatmentEntry._ID + ") ON CONFLICT REPLACE);";
+                " UNIQUE (" + GoEsteticaContract.ScheduleEntry._ID + ") ON CONFLICT REPLACE);";
         db.execSQL(SQL_CREATE_SCHEDULE_TABLE);
     }
 

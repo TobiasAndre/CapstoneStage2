@@ -12,30 +12,29 @@ import android.widget.TextView;
 
 public class Util {
 
-
-
-    public static void showLongSnackBar(View mView, String mText,TYPE_SNACKBAR type){
-        Snackbar snackbar = Snackbar.make(mView, mText, Snackbar.LENGTH_LONG);
-        if(type == TYPE_SNACKBAR.ERROR) {
-            snackbar.getView().setBackgroundColor(Color.RED);
-        }else if (type==TYPE_SNACKBAR.ALERT){
-            snackbar.getView().setBackgroundColor(Color.YELLOW);
-        }else if(type==TYPE_SNACKBAR.MESSAGE){
-            snackbar.getView().setBackgroundColor(Color.BLUE);
-        }else if(type==TYPE_SNACKBAR.SUCCESS){
-            snackbar.getView().setBackgroundColor(Color.GREEN);
-        }
-        snackbar.show();
-    }
-
-
     @NonNull
-    public static Snackbar makeSnackbar(@NonNull View layout, @NonNull CharSequence  text, int duration, int backgroundColor, int textColor/*, int actionTextColor*/){
+    public static Snackbar makeSnackbar(@NonNull View layout, @NonNull CharSequence  text, int duration,TYPE_SNACKBAR type){
         Snackbar snackBarView = Snackbar.make(layout, text, duration);
-        snackBarView.getView().setBackgroundColor(backgroundColor);
-        //snackBarView.setActionTextColor(actionTextColor);
+        snackBarView.getView().setBackgroundColor(Color.BLACK);
         TextView tv = (TextView) snackBarView.getView().findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(textColor);
+        tv.setTextColor(Color.WHITE);
+
+        if(type == TYPE_SNACKBAR.ERROR) {
+            snackBarView.getView().setBackgroundColor(Color.RED);
+            tv.setTextColor(Color.WHITE);
+        }else if (type==TYPE_SNACKBAR.ALERT){
+            snackBarView.getView().setBackgroundColor(Color.YELLOW);
+            tv.setTextColor(Color.BLACK);
+        }else if(type==TYPE_SNACKBAR.MESSAGE){
+            snackBarView.getView().setBackgroundColor(Color.BLUE);
+            tv.setTextColor(Color.WHITE);
+        }else if(type==TYPE_SNACKBAR.SUCCESS){
+            snackBarView.getView().setBackgroundColor(Color.GREEN);
+            tv.setTextColor(Color.BLACK);
+        }
+
+        //snackBarView.setActionTextColor(actionTextColor);
+
         return snackBarView;
     }
 

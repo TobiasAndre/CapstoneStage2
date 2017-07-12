@@ -199,28 +199,7 @@ public class CustomerFragment extends Fragment {
                 Bundle res = data.getExtras();
                 if (res.containsKey("id")) {
                     idCustomer = res.getInt("id");
-
-                    Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
-                    String selection = GoEsteticaContract.CustomerEntry._ID + " = ?";
-                    String[] selectionArguments = new String[]{String.valueOf(idCustomer)};
-
-                    Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
-                    if (c != null) {
-                        while (c.moveToNext()) {
-
-                            String imageUrl = c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO));
-                            Bitmap myBitmap = BitmapFactory.decodeFile(imageUrl);
-                            customerPhoto.setImageBitmap(myBitmap);
-
-                            edCustomerName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME)));
-                            edCustomerPhone.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE)));
-                            edCustomerCellPhone.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE)));
-                            edCustomerEmail.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL)));
-                            selectValue(spnDefaultPaymentType, c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE)));
-                            edCustomerAddress.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS)));
-                        }
-                        c.close();
-                    }
+                    loadData(idCustomer);
                 }
             }
         }
@@ -239,6 +218,30 @@ public class CustomerFragment extends Fragment {
         }
     }
 
+    private void loadData(int id){
+        Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
+        String selection = GoEsteticaContract.CustomerEntry._ID + " = ?";
+        String[] selectionArguments = new String[]{String.valueOf(id)};
+
+        Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+        if (c != null) {
+            while (c.moveToNext()) {
+
+                String imageUrl = c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO));
+                Bitmap myBitmap = BitmapFactory.decodeFile(imageUrl);
+                customerPhoto.setImageBitmap(myBitmap);
+
+                edCustomerName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME)));
+                edCustomerPhone.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE)));
+                edCustomerCellPhone.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE)));
+                edCustomerEmail.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL)));
+                selectValue(spnDefaultPaymentType, c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE)));
+                edCustomerAddress.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS)));
+            }
+            c.close();
+        }
+    }
+
     private void selectValue(Spinner spinner, String value) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).equals(value)) {
@@ -250,11 +253,11 @@ public class CustomerFragment extends Fragment {
 
     private Boolean validateRequired(){
         if(edCustomerName.getText().toString().isEmpty()){
-            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)),TYPE_SNACKBAR.ERROR);
+            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
             return false;
         }
         if(edCustomerCellPhone.getText().toString().isEmpty()){
-            Util.showLongSnackBar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)),TYPE_SNACKBAR.ERROR);
+            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
             return false;
         }
         return true;
@@ -285,20 +288,12 @@ public class CustomerFragment extends Fragment {
             ContentResolver customerContentResolver = this.getContext().getContentResolver();
 
             if(idCustomer > 0) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME,edCustomerName.getText().toString());
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO,imagePath);
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_FONE,edCustomerPhone.getText().toString());
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE,edCustomerCellPhone.getText().toString());
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_ADDRESS,edCustomerAddress.getText().toString());
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL,edCustomerEmail.getText().toString());
-                contentValues.put(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_DEFAULT_PAYMENT_TYPE,spnDefaultPaymentType.getSelectedItem().toString());
 
                 String selectionClause = GoEsteticaContract.CustomerEntry._ID + " = ?";
                 String[] selectionArgs = new String[]{String.valueOf(idCustomer)};
                 customerContentResolver.update(
                         GoEsteticaContract.CustomerEntry.CONTENT_URI,
-                        contentValues,selectionClause,selectionArgs);
+                        customerValues[0],selectionClause,selectionArgs);
 
             }else{
                 customerContentResolver.bulkInsert(
@@ -307,14 +302,12 @@ public class CustomerFragment extends Fragment {
             }
 
 
-            Util.makeSnackbar(rootView,getString(R.string.save_sucess), Snackbar.LENGTH_LONG, Color.GREEN,Color.BLACK).show();
-
-            //Util.showLongSnackBar(rootView, getString(R.string.save_sucess), TYPE_SNACKBAR.SUCCESS);
+            Util.makeSnackbar(rootView,getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
 
             ClearFields();
 
         }catch (Exception error){
-            Util.showLongSnackBar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),TYPE_SNACKBAR.ERROR);
+            Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
         }
     }
 

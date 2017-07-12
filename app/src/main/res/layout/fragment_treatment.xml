@@ -41,18 +41,42 @@
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginTop="10dp"/>
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ed_treatment_name"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="60"
+                    android:textSize="10sp"
+                    android:layout_marginTop="10dp"/>
+
+                <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="bottom"
+                    android:id="@+id/btn_find_treatment"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_search" />
+
+            </LinearLayout>
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"/>
+                android:id="@+id/ed_treatment_description"
+                android:inputType="textCapCharacters"
+                android:textSize="10sp"/>
 
         </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -95,11 +119,17 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/ed_treatment_price"
+                android:text="0,00"
+                android:textAlignment="textEnd"
                 android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/ed_treatment_sessions"
+                android:text="1"
+                android:textAlignment="center"
                 android:textSize="12sp"/>
 
         </LinearLayout>

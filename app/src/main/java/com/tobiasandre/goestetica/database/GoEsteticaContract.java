@@ -24,7 +24,6 @@ public class GoEsteticaContract {
                 .build();
 
         public static final String TABLE_NAME = "customer";
-        public static final String COLUMN_CUSTOMER_ID = "customer_id";
         public static final String COLUMN_CUSTOMER_NAME = "name";
         public static final String COLUMN_CUSTOMER_FONE = "fone";
         public static final String COLUMN_CUSTOMER_CELLPHONE = "cellphone";
@@ -61,6 +60,15 @@ public class GoEsteticaContract {
         public static final String COLUMN_TREATMENT_PRICE = "price";
         public static final String COLUMN_TREATMENT_SESSIONS = "sessions";
 
+        /** Matches: /items/ */
+        public static Uri buildDirUri() {
+            return BASE_CONTENT_URI.buildUpon().appendPath("treatment").build();
+        }
+
+        /** Matches: /items/[_id]/ */
+        public static Uri buildItemUri(long _id) {
+            return BASE_CONTENT_URI.buildUpon().appendPath("treatment").appendPath(Long.toString(_id)).build();
+        }
 
     }
 

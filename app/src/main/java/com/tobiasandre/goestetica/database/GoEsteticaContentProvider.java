@@ -28,6 +28,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
         final String authority = GoEsteticaContract.CONTENT_AUTHORITY;
         matcher.addURI(authority, GoEsteticaContract.PATH_CUSTOMER, CODE_CUSTOMER);
         matcher.addURI(authority, GoEsteticaContract.PATH_TREATMENT, CODE_TREATMENT);
+        matcher.addURI(authority, GoEsteticaContract.PATH_SCHEDULE, CODE_SCHEDULE);
         return matcher;
     }
 
@@ -80,6 +81,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
                 if (rowsInserted > 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
+                return rowsInserted;
             case CODE_SCHEDULE:
                 db.beginTransaction();
                 try{
@@ -96,6 +98,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
                 if (rowsInserted > 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
+                return rowsInserted;
             default:
                 return super.bulkInsert(uri,values);
         }
@@ -126,7 +129,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         GoEsteticaContract.TreatmentEntry.TABLE_NAME,
                         projection,
-                        GoEsteticaContract.TreatmentEntry._ID + " = ? " ,
+                        selection,
                         selectionArgs,
                         null,
                         null,
@@ -139,7 +142,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         GoEsteticaContract.ScheduleEntry.TABLE_NAME,
                         projection,
-                        GoEsteticaContract.ScheduleEntry._ID + " = ? " ,
+                        selection ,
                         selectionArgs,
                         null,
                         null,

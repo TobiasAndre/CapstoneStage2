@@ -11,6 +11,7 @@
     <android.support.v7.widget.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/search_treatment"
         android:focusable="false"
         app:queryHint="Pesquisa"
         app:iconifiedByDefault="false" />
@@ -29,5 +30,12 @@
         </android.support.v7.widget.RecyclerView>
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pb_loading_indicator"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
 </LinearLayout>

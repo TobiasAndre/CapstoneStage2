@@ -19,7 +19,6 @@ import com.tobiasandre.goestetica.R;
 
 public class HomeFragment extends Fragment {
 
-    private static String TAG = HomeFragment.class.getSimpleName();
     FloatingActionButton btnAdd;
 
     @Override
@@ -45,8 +44,6 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
     }
-
-
 
     @Override
     public void onResume() {

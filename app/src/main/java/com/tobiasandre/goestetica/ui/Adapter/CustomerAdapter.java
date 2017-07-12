@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.vision.text.Line;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 
@@ -41,7 +43,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     public CustomerAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_contact, viewGroup, false);
-
         view.setFocusable(true);
 
         return new CustomerAdapterViewHolder(view);
@@ -50,7 +51,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     @Override
     public void onBindViewHolder(CustomerAdapterViewHolder customerAdapterViewHolder, int position) {
         mCursor.moveToPosition(position);
-        customerAdapterViewHolder.idCadastro = mCursor.getInt(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry._ID));
+        customerAdapterViewHolder.id = mCursor.getInt(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry._ID));
         String photoWay = mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_PHOTO));
         try {
             if (!photoWay.isEmpty()) {
@@ -67,6 +68,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         customerAdapterViewHolder.email.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_EMAIL)));
         customerAdapterViewHolder.phone.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_CELLPHONE)));
         customerAdapterViewHolder.imgCheck.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -87,14 +89,14 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
 
     class CustomerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        int idCadastro = 0;
+        int id = 0;
         final ImageView ContactImg,imgCheck;
         final TextView name,email,phone;
 
 
         CustomerAdapterViewHolder(View view) {
             super(view);
-            idCadastro = 0;
+            id = 0;
             ContactImg = (ImageView)view.findViewById(R.id.img_contact);
             imgCheck = (ImageView)view.findViewById(R.id.img_checked);
             name = (TextView)view.findViewById(R.id.tv_display_name);

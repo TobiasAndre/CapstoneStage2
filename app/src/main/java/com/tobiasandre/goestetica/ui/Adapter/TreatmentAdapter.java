@@ -25,22 +25,23 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
     private final Context mContext;
     private Cursor mCursor;
 
-    final private TreatmentAdapterOnClickHandler mClickHandler;
 
-    public interface TreatmentAdapterOnClickHandler {
-        void onClick(long id);
+    private final Callbacks mCallbacks;
+
+    public interface Callbacks {
+        void open(int position);
     }
 
-    public TreatmentAdapter(@NonNull Context context, TreatmentAdapterOnClickHandler clickHandler) {
+    public TreatmentAdapter(@NonNull Context context,Callbacks callbacks) {
         mContext = context;
-        mClickHandler = clickHandler;
+        this.mCallbacks = callbacks;
     }
 
 
     @Override
     public TreatmentAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_treatment_list, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_treatment, viewGroup, false);
 
 
         view.setFocusable(true);
@@ -52,9 +53,7 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
     public void onBindViewHolder(TreatmentAdapterViewHolder treatmentAdapterViewHolder, int position) {
         mCursor.moveToPosition(position);
 
-        int rows = mCursor.getCount();
-
-
+        treatmentAdapterViewHolder.id = mCursor.getInt(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry._ID));
         treatmentAdapterViewHolder.name.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME)));
         treatmentAdapterViewHolder.description.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION)));
         Double vlprice = mCursor.getDouble(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE));
@@ -75,12 +74,13 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
 
 
     class TreatmentAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        int id = 0;
         final TextView name,description,price;
 
 
         TreatmentAdapterViewHolder(View view) {
             super(view);
+            id = 0;
             name = (TextView)view.findViewById(R.id.tv_treatment_name);
             description = (TextView)view.findViewById(R.id.tv_treatment_description);
             price = (TextView)view.findViewById(R.id.tv_treatment_price);
@@ -92,6 +92,8 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             mCursor.moveToPosition(adapterPosition);
+            int id = mCursor.getInt(mCursor.getColumnIndex(GoEsteticaContract.CustomerEntry._ID));
+            mCallbacks.open(id);
         }
     }
 

@@ -71,20 +71,20 @@
 
                 <TextView
                     android:id="@+id/tv_display_name"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tv_phone_number"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tv_email_address"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black" />
@@ -94,6 +94,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
+                android:id="@+id/info_check"
                 android:gravity="end|center"
                 android:orientation="vertical">
 
