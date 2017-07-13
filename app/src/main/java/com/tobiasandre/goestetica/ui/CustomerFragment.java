@@ -193,6 +193,7 @@ public class CustomerFragment extends Fragment {
         else if(requestCode ==2){
             uri = data.getData();
             ImageCropFunction();
+
         }
         else if(requestCode ==3){
             if(data!=null) {

@@ -1,8 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:labelFor="@+id/dt_schedule"
+            android:text="@string/schedule_date"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/dt_schedule"
+            android:layout_marginStart="10dp"
+            android:inputType="date"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:labelFor="@+id/hr_schedule"
+            android:layout_marginStart="10dp"
+            android:text="@string/schedule_time"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/hr_schedule"
+            android:inputType="time"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:labelFor="@+id/nm_customer"
+            android:text="@string/schedule_customer"/>
+
+
+        <EditText
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/nm_customer"
+            android:inputType="textCapCharacters"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:id="@+id/btn_find_customer"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/btn_find_customer"
+            android:src="@mipmap/ic_search" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:labelFor="@+id/nm_treatment"
+            android:text="@string/schedule_treatment"/>
+
+
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/nm_treatment"
+            android:inputType="textCapCharacters"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:id="@+id/btn_find_treatment"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/btn_find_treatment"
+            android:src="@mipmap/ic_search" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/vl_price"
+            android:textStyle="bold"
+            android:text="@string/schedule_price"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/vl_price"
+            android:inputType="numberDecimal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/nr_sessions"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:text="@string/schedule_session"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/nr_sessions"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:gravity="end|center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_save_treatment"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_save_black"/>
+
+    </LinearLayout>
 </LinearLayout>
