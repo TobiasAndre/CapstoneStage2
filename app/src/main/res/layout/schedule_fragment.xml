@@ -23,6 +23,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/dt_schedule"
+            android:textSize="14sp"
+            android:textAlignment="center"
             android:layout_marginStart="10dp"
             android:inputType="date"/>
 
@@ -38,6 +40,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:textSize="14sp"
+            android:textAlignment="center"
             android:id="@+id/hr_schedule"
             android:inputType="time"/>
 
@@ -59,7 +63,7 @@
 
 
         <EditText
-            android:layout_width="270dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nm_customer"
@@ -94,7 +98,7 @@
 
 
         <EditText
-            android:layout_width="240dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nm_treatment"
@@ -132,6 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/vl_price"
+            android:textAlignment="textEnd"
             android:inputType="numberDecimal"/>
 
         <TextView
@@ -147,6 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nr_sessions"
+            android:textAlignment="center"
             android:inputType="number"/>
     </LinearLayout>
 
@@ -160,7 +166,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_save_treatment"
+            android:id="@+id/btn_save_schedule"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_save_black"/>

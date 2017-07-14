@@ -1,6 +1,8 @@
 package com.tobiasandre.goestetica.ui;
 
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,7 +20,8 @@ import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
 import com.tobiasandre.goestetica.utils.Util;
 
-import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -27,6 +30,7 @@ import java.util.Date;
 
 public class ScheduleFragment extends Fragment {
 
+    final static String TAG = ScheduleFragment.class.getSimpleName();
     View rootView;
     EditText edDtSchedule,edHrSchedule,edNameCustomer,edNameTreatment,edVlPrice,edQtSessions;
     ImageButton btFindCustomer,btFindTreatment,btSave;
@@ -83,14 +87,56 @@ public class ScheduleFragment extends Fragment {
             });
         }
 
+        cleanFields();
+
         return rootView;
     }
 
     private void saveValues(){
         if(verifyRequired()){
+            try {
+                ContentValues[] treatmentValues = new ContentValues[1];
+                ContentValues value = new ContentValues();
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID, idCustomer);
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_TREATMENT_ID,idTreatment);
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE,edDtSchedule.getText().toString());
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR,edHrSchedule.getText().toString());
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE,edVlPrice.getText().toString());
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS,edQtSessions.getText().toString());
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES,"30");
 
+                treatmentValues[0] = value;
+
+                ContentResolver treatmentContentResolver = this.getContext().getContentResolver();
+
+                treatmentContentResolver.bulkInsert(
+                        GoEsteticaContract.ScheduleEntry.CONTENT_URI,
+                        treatmentValues);
+
+                Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
+
+                cleanFields();
+
+            }catch (Exception error){
+                Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+            }
         }
     }
+
+    private void cleanFields(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String sDate= sdf.format(date);
+        edDtSchedule.setText(sDate);
+        sdf = new SimpleDateFormat("HH:mm");
+        edHrSchedule.setText(sdf.format(date));
+        edQtSessions.setText("1");
+        edVlPrice.setText("0,00");
+        edNameCustomer.setText("");
+        edNameTreatment.setText("");
+        edNameCustomer.requestFocus();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

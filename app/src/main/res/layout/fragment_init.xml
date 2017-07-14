@@ -60,4 +60,11 @@
         android:src="@drawable/ic_add_24dp"
         app:backgroundTint="@color/colorPrimary" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading_indicator"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
 </android.support.design.widget.CoordinatorLayout>
