@@ -5,29 +5,43 @@
     <string name="content_authority">com.tobiasandre.goestetica</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_attendance">Atencimento</string>
+    <string name="action_option_selection">Selecione a opção desejada</string>
+    <string name="action_confirmation">Confirmado</string>
     <string name="wellcome">Seja Bem Vindo, %s!</string>
     <string name="take_schedule">Adicione um Agendamento...</string>
     <string name="retry">Tentar Novamente</string>
     <string name="error_login">Erro ao Efetuar o Login:</string>
     <string name="read_contacts">Lendo Lista de Contatos</string>
+    <string name="price_default">0,00</string>
+    <string name="qt_default">1</string>
+    <string name="hr_default">1:00</string>
+    <string name="duration">Duração : %s h</string>
+    <string name="general_error">Erro :</string>
+    <string name="save_sucess">Registro Salvo com Sucesso!</string>
+    <string name="name">Nome :</string>
+    <string name="type">Tipo:</string>
+    <string name="action_image_selection">Selecionar Imagem</string>
+    <string name="action_take_picture">Tirar Foto</string>
+
+    <!-- Import Contact -->
     <string name="contact_name">Nome:</string>
     <string name="contact_phone">Telefone:</string>
     <string name="contact_email">Email:</string>
     <string name="contact_photo">Foto</string>
     <string name="checked">Marcado</string>
     <string name="import_contacts">Importar contatos</string>
-    <string name="price_default">0,00</string>
-    <string name="qt_default">1</string>
-    <string name="hr_default">1:00</string>
+
+    <!-- customer -->
     <string name="customer_name">Nome :</string>
     <string name="customer_phone">Fone Fixo :</string>
     <string name="customer_cellphone">Celular :</string>
     <string name="customer_email">Email :</string>
     <string name="customer_address">Endereço :</string>
     <string name="customer_default_payment">Pagamento:</string>
-    <string name="general_error">Erro :</string>
-    <string name="save_sucess">Registro Salvo com Sucesso!</string>
     <string name="customer_required">É Necessário Informar o Nome do Cliente!</string>
+
     <string name="treatment_name_required">É Necessário Informar o nome do Tratamento!</string>
     <string name="find">Pesquisa</string>
     <string name="schedule_date">Data :</string>
@@ -35,7 +49,7 @@
     <string name="schedule_customer">Cliente :</string>
     <string name="schedule_treatment">Tratamento :</string>
     <string name="schedule_price">Preço :</string>
-    <string name="schedule_session">Seções :</string>
+    <string name="schedule_session">Sessões :</string>
     <string name="btn_find_customer">Selecionar Cliente</string>
     <string name="btn_find_treatment">Selecionar Tratamento</string>
 
@@ -43,7 +57,7 @@
     <string name="schedule_qt_session">Sessões : %s</string>
     <string name="schedule_vl_session">Valor : %s</string>
     <string name="schedule_confirmation">Confirmado!</string>
-
+    <string name="schedule_duration">Duração:</string>
 
     <string name="credit_card">Cartao de Credito</string>
     <string name="money">Dinheiro</string>
@@ -54,6 +68,7 @@
     <string name="schedule">Agendar</string>
     <string name="reports">Relatorios \\ Graficos</string>
 
+    <!-- Treatment -->
     <string name="treatment_name">Tratamento : </string>
     <string name="treatment_description">Descrição :</string>
     <string name="treatment_price">Valor :</string>

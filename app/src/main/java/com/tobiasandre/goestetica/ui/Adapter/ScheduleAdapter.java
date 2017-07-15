@@ -81,6 +81,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         if (c != null) {
             while (c.moveToNext()) {
                 scheduleAdapterViewHolder.name_treatment.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME)));
+                scheduleAdapterViewHolder.tp_treatment.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE)));
+                scheduleAdapterViewHolder.tm_treatment.setText(String.format(mContext.getString(R.string.duration),c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION))));
+
             }
             c.close();
         }
@@ -89,6 +92,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         scheduleAdapterViewHolder.tv_vl_session.setText(String.format(mContext.getString(R.string.schedule_vl_session),formate.format(vlSession)));
         scheduleAdapterViewHolder.hr_schedule.setText(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR)));
         scheduleAdapterViewHolder.tv_qt_sessions.setText(String.format(mContext.getString(R.string.schedule_qt_session),mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS))));
+
     }
 
     @Override
@@ -111,7 +115,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
         int id = 0;
         final ImageView imgCustomer;
-        final TextView name_customer,hr_schedule,tp_treatment,name_treatment,tv_qt_sessions,tv_vl_session;
+        final TextView name_customer,hr_schedule,tp_treatment,name_treatment,
+                tv_qt_sessions,tv_vl_session,tm_treatment;
 
 
         ScheduleAdapterViewHolder(View view) {
@@ -125,7 +130,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             name_treatment = (TextView)view.findViewById(R.id.tv_nm_treatment);
             tv_qt_sessions = (TextView)view.findViewById(R.id.tv_qt_session);
             tv_vl_session = (TextView)view.findViewById(R.id.tv_vl_session);
-
+            tm_treatment = (TextView)view.findViewById(R.id.tv_time_treatment);
             view.setOnClickListener(this);
         }
 

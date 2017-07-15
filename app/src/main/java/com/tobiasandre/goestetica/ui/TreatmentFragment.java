@@ -148,7 +148,7 @@ public class TreatmentFragment extends Fragment {
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE, Double.valueOf(edPrice.getText().toString().replace(",",".")));
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS, Integer.valueOf(edSessions.getText().toString()));
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION, edDuration.getText().toString());
-            value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE,typeTreatment.toString());
+            value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE,typeTreatment.getSelectedItem().toString());
             treatmentValues[0] = value;
 
             ContentResolver treatmentContentResolver = this.getContext().getContentResolver();

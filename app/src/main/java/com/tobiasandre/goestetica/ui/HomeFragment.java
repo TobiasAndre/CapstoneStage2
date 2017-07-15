@@ -1,5 +1,6 @@
 package com.tobiasandre.goestetica.ui;
 
+import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,12 +19,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.Adapter.ScheduleAdapter;
+
+import java.util.Calendar;
 
 /**
  * Created by TobiasAndre on 22/06/2017.
@@ -44,6 +48,7 @@ public class HomeFragment extends Fragment implements
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
     FloatingActionButton btnAdd;
+
 
 
     @Override

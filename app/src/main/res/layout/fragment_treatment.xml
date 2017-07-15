@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -22,7 +22,8 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:gravity="end"
-                android:text="Nome:"/>
+                android:labelFor="@+id/ed_treatment_name"
+                android:text="@string/name"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -30,14 +31,15 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="Descrição:"/>
+                android:labelFor="@+id/ed_treatment_description"
+                android:text="@string/treatment_description"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
@@ -52,7 +54,7 @@
                     android:id="@+id/ed_treatment_name"
                     android:inputType="textCapCharacters"
                     android:maxLength="60"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     android:layout_marginTop="10dp"/>
 
                 <ImageButton
@@ -62,6 +64,7 @@
                     android:id="@+id/btn_find_treatment"
                     android:background="@color/white"
                     android:scaleType="centerCrop"
+                    android:contentDescription="@string/find"
                     android:src="@mipmap/ic_search" />
 
 
@@ -73,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_treatment_description"
                 android:inputType="textCapCharacters"
-                android:textSize="10sp"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -87,7 +90,7 @@
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -95,14 +98,15 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="end"
-                android:text="Tipo: "/>
+                android:labelFor="@+id/spnType"
+                android:text="@string/type"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
@@ -124,7 +128,7 @@
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="120dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -133,7 +137,8 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:gravity="end"
-                android:text="Preço:"/>
+                android:labelFor="@+id/ed_treatment_price"
+                android:text="@string/schedule_price"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,7 +146,8 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="Sessões:"/>
+                android:labelFor="@+id/ed_treatment_sessions"
+                android:text="@string/schedule_session"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -149,14 +155,15 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="Duração:"/>
+                android:labelFor="@+id/ed_treatment_duration"
+                android:text="@string/schedule_duration"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="120dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
@@ -164,6 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_treatment_price"
+                android:inputType="numberDecimal"
                 android:text="@string/price_default"
                 android:textAlignment="textEnd"
                 android:textSize="12sp"/>
@@ -172,6 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_treatment_sessions"
+                android:inputType="number"
                 android:text="@string/qt_default"
                 android:textAlignment="center"
                 android:textSize="12sp"/>
@@ -180,9 +189,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_treatment_duration"
+                android:inputType="time"
                 android:text="@string/hr_default"
                 android:textAlignment="center"
-                android:textSize="10sp"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -199,6 +209,7 @@
                 android:layout_marginBottom="15dp"
                 android:background="@color/white"
                 android:scaleType="centerCrop"
+                android:contentDescription="@string/action_save"
                 android:src="@mipmap/ic_save_black"/>
 
         </LinearLayout>

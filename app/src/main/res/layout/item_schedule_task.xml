@@ -34,8 +34,7 @@
                     android:id="@+id/tv_nm_customer"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:hint="Katiucia Terra Tremea"/>
+                    android:textAlignment="center"/>
 
             </LinearLayout>
 
@@ -66,8 +65,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:id="@+id/tv_hr_schedule"
-                    android:text="07:30"/>
+                    android:id="@+id/tv_hr_schedule"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -75,7 +73,6 @@
                     android:id="@+id/tv_tp_treatment"
                     android:layout_marginTop="5dp"
                     android:textSize="12sp"
-                    android:text="Facial"
                     android:textStyle="italic"
                     android:textColor="@color/deep_purple"/>
 
@@ -85,8 +82,7 @@
                     android:id="@+id/tv_nm_treatment"
                     android:layout_marginTop="5dp"
                     android:maxLines="3"
-                    android:textSize="10sp"
-                    android:text="Limpeza de Pele"/>
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -110,8 +106,7 @@
                         android:gravity="end"
                         android:textSize="12sp"
                         android:textStyle="italic"
-                        android:textColor="@color/orange"
-                        android:text="1h30"/>
+                        android:textColor="@color/orange"/>
 
 
                 </LinearLayout>
@@ -133,7 +128,7 @@
                         android:textSize="12sp"
                         android:textStyle="italic"
                         android:textColor="@color/green"
-                        android:text="Confirmado!"/>
+                        android:text="@string/action_confirmation"/>
 
                 </LinearLayout>
 
@@ -154,7 +149,7 @@
                         android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="@color/indigo"
-                        android:text="Sessão: 1/2"/>
+                        android:text="@string/schedule_qt_session"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -166,7 +161,7 @@
                         android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="@color/red"
-                        android:text="Valor: R$ 0,00"/>
+                        android:text="@string/schedule_vl_session"/>
 
                 </LinearLayout>
 

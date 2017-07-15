@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textColor="@android:color/white"
-            android:text="Atendimento"
+            android:text="@string/action_attendance"
             android:textStyle="bold"/>
 
 
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="Selecione a opção desejada"
+            android:text="@string/action_option_selection"
             android:textSize="12sp"/>
 
 

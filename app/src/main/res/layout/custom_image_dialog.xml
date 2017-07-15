@@ -21,9 +21,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_select_image"
             android:textStyle="bold"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:text="Selecionar Imagem   "/>
+            android:text="@string/action_image_selection"/>
 
 
         <TextView
@@ -31,10 +31,10 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:id="@+id/tv_take_picture"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:text="Tirar Foto  "/>
+            android:text="@string/action_take_picture"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
