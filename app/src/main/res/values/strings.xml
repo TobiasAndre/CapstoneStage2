@@ -16,6 +16,9 @@
     <string name="contact_photo">Foto</string>
     <string name="checked">Marcado</string>
     <string name="import_contacts">Importar contatos</string>
+    <string name="price_default">0,00</string>
+    <string name="qt_default">1</string>
+    <string name="hr_default">1:00</string>
     <string name="customer_name">Nome :</string>
     <string name="customer_phone">Fone Fixo :</string>
     <string name="customer_cellphone">Celular :</string>
@@ -70,6 +73,11 @@
     <string-array name="payment_types">
         <item>@string/money</item>
         <item>@string/credit_card</item>
+    </string-array>
+
+    <string-array name="treatment_types">
+        <item>Facial</item>
+        <item>Corporal</item>
     </string-array>
 
 

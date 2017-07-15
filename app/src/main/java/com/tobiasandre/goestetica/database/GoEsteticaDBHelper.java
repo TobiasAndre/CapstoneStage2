@@ -40,6 +40,8 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION + " STRING, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE + " NUMERIC, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS + " INTEGER, "+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION + " STRING,"+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE + " STRING,"+
                 " UNIQUE (" + GoEsteticaContract.TreatmentEntry._ID + ") ON CONFLICT REPLACE);";
         db.execSQL(SQL_CREATE_TREATMENT_TABLE);
 

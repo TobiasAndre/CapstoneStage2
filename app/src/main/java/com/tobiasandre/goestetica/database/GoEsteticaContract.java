@@ -59,7 +59,8 @@ public class GoEsteticaContract {
         public static final String COLUMN_TREATMENT_DESCRIPTION = "description";
         public static final String COLUMN_TREATMENT_PRICE = "price";
         public static final String COLUMN_TREATMENT_SESSIONS = "sessions";
-
+        public static final String COLUMN_TREATMENT_DURATION = "duration";
+        public static final String COLUMN_TREATMENT_TYPE = "type";
         /** Matches: /items/ */
         public static Uri buildDirUri() {
             return BASE_CONTENT_URI.buildUpon().appendPath("treatment").build();

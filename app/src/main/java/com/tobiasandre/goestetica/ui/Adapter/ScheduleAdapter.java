@@ -87,7 +87,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         DecimalFormat formate = new DecimalFormat("0.00");
         Double vlSession = Double.valueOf(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));
         scheduleAdapterViewHolder.tv_vl_session.setText(String.format(mContext.getString(R.string.schedule_vl_session),formate.format(vlSession)));
-        scheduleAdapterViewHolder.hr_schedule.setText("");
+        scheduleAdapterViewHolder.hr_schedule.setText(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR)));
         scheduleAdapterViewHolder.tv_qt_sessions.setText(String.format(mContext.getString(R.string.schedule_qt_session),mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS))));
     }
 

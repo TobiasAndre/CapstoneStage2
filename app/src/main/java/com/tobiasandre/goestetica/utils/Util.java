@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -38,4 +39,14 @@ public class Util {
         return snackBarView;
     }
 
+    public static void setSpinText(Spinner spin, String text)
+    {
+        for(int i= 0; i < spin.getAdapter().getCount(); i++)
+        {
+            if(spin.getAdapter().getItem(i).toString().contains(text))
+            {
+                spin.setSelection(i);
+            }
+        }
+    }
 }

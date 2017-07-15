@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
@@ -30,7 +31,8 @@ public class TreatmentFragment extends Fragment {
     private final String TAG = TreatmentFragment.class.getSimpleName();
     View rootView;
     Integer idTreatment=-1;
-    EditText edName,edDescription,edPrice,edSessions;
+    Spinner typeTreatment;
+    EditText edName,edDescription,edPrice,edSessions,edDuration;
     ImageButton btnSave,btnFindTreatment;
 
     @Override
@@ -49,6 +51,8 @@ public class TreatmentFragment extends Fragment {
         edDescription = (EditText)rootView.findViewById(R.id.ed_treatment_description);
         edPrice = (EditText)rootView.findViewById(R.id.ed_treatment_price);
         edSessions = (EditText)rootView.findViewById(R.id.ed_treatment_sessions);
+        edDuration = (EditText)rootView.findViewById(R.id.ed_treatment_duration);
+        typeTreatment = (Spinner)rootView.findViewById(R.id.spnType);
         btnSave = (ImageButton)rootView.findViewById(R.id.btn_save_treatment);
         btnFindTreatment = (ImageButton)rootView.findViewById(R.id.btn_find_treatment);
 
@@ -111,6 +115,8 @@ public class TreatmentFragment extends Fragment {
                 edDescription.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION)));
                 edPrice.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE)));
                 edSessions.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS)));
+                edDuration.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION)));
+                Util.setSpinText(typeTreatment,c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE)));
             }
             c.close();
         }
@@ -141,6 +147,8 @@ public class TreatmentFragment extends Fragment {
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION, edDescription.getText().toString());
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE, Double.valueOf(edPrice.getText().toString().replace(",",".")));
             value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS, Integer.valueOf(edSessions.getText().toString()));
+            value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION, edDuration.getText().toString());
+            value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE,typeTreatment.toString());
             treatmentValues[0] = value;
 
             ContentResolver treatmentContentResolver = this.getContext().getContentResolver();
@@ -170,6 +178,8 @@ public class TreatmentFragment extends Fragment {
         edDescription.setText("");
         edPrice.setText("0,00");
         edSessions.setText("1");
+        edDuration.setText("01:00");
+        typeTreatment.setSelection(0);
         edName.requestFocus();
     }
 
