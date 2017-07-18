@@ -28,6 +28,15 @@
             android:layout_marginStart="10dp"
             android:inputType="date"/>
 
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnSetDate"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerCrop"
+            android:background="@color/white"
+            android:src="@mipmap/ic_calendar"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,13 +46,21 @@
             android:text="@string/schedule_time"/>
 
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="12sp"
             android:textAlignment="center"
             android:id="@+id/hr_schedule"
             android:inputType="time"/>
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnSetTime"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_clock"/>
 
     </LinearLayout>
 
@@ -164,13 +181,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:gravity="end|center"
+        android:gravity="start"
         android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_confirmed"
+            android:layout_marginStart="5dp"
+            android:text="Confirmado?"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_save_schedule"
+            android:layout_marginStart="100dp"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:contentDescription="@string/action_save"

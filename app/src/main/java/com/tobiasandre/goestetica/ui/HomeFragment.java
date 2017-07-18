@@ -1,10 +1,13 @@
 package com.tobiasandre.goestetica.ui;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
@@ -20,14 +23,21 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.Adapter.ScheduleAdapter;
+import com.tobiasandre.goestetica.utils.Util;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+import static android.R.attr.startYear;
+
 
 /**
  * Created by TobiasAndre on 22/06/2017.
@@ -42,11 +52,12 @@ public class HomeFragment extends Fragment implements
     Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
     public static final int ID_SCHEDULE_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
-    TextView tvTakeSchedule;
+    TextView tvTakeSchedule,tvCurrentDate;
     SearchView searchView;
     ScheduleAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
+    private ImageButton btnSetDate;
     FloatingActionButton btnAdd;
 
 
@@ -57,6 +68,10 @@ public class HomeFragment extends Fragment implements
 
         btnAdd = (FloatingActionButton)rootView.findViewById(R.id.fab_add_scheduling);
         tvTakeSchedule = (TextView)rootView.findViewById(R.id.tv_take_schedule);
+        tvCurrentDate = (TextView)rootView.findViewById(R.id.tv_current_date);
+        btnSetDate = (ImageButton) rootView.findViewById(R.id.btnSetDate);
+
+        tvCurrentDate.setText(Util.getStringDate().replace("-","/"));
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_schedule);
 
@@ -89,6 +104,22 @@ public class HomeFragment extends Fragment implements
 
         showLoading();
 
+        if(btnSetDate!=null){
+            btnSetDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+                    int mYear = c.get(Calendar.YEAR);
+                    int mMonth = c.get(Calendar.MONTH);
+                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+                    System.out.println("the selected " + mDay);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            new mDateSetListener(), mYear, mMonth, mDay);
+                    dialog.show();
+                }
+            });
+        }
+
         getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, null, this);
 
         return rootView;
@@ -111,10 +142,14 @@ public class HomeFragment extends Fragment implements
         String filter = "";
         if(bundle!=null){
             filter = bundle.getString("filter");
+        }else {
+            DecimalFormat format = new DecimalFormat("00");
+            filter += GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate() +
+                    "' and '"+(Integer.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))+1)+"-"+format.format(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1))+"-"+Calendar.getInstance().get(Calendar.YEAR)+"'";
         }
-
         return new CursorLoader(getContext(),contentUri,null,filter,null,null);
     }
+
 
 
     private void restartLoader(String vWhere){
@@ -124,7 +159,6 @@ public class HomeFragment extends Fragment implements
 
         getActivity().getSupportLoaderManager().restartLoader(ID_SCHEDULE_LOADER,bundle,this);
     }
-
 
 
     @Override
@@ -139,8 +173,6 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        int nRows = data.getCount();
-
         if(mAdapter!=null && data!=null) {
             mAdapter.swapCursor(data);
 
@@ -173,5 +205,28 @@ public class HomeFragment extends Fragment implements
     @Override
     public void open(int position) {
 
+    }
+
+
+    private class mDateSetListener implements DatePickerDialog.OnDateSetListener{
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            DecimalFormat format = new DecimalFormat("00");
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            tvCurrentDate.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
+                    .append(mYear).append(" "));
+
+            System.out.println(tvCurrentDate.getText().toString());
+
+            restartLoader(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+tvCurrentDate.getText().toString().replace("/","-").trim()+"' and '"+format.format(mDay+1)+"-"+format.format(mMonth+1)+"-"+mYear+"'");
+
+        }
     }
 }

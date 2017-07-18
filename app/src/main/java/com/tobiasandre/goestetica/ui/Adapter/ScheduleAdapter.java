@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -92,6 +93,13 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         scheduleAdapterViewHolder.tv_vl_session.setText(String.format(mContext.getString(R.string.schedule_vl_session),formate.format(vlSession)));
         scheduleAdapterViewHolder.hr_schedule.setText(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR)));
         scheduleAdapterViewHolder.tv_qt_sessions.setText(String.format(mContext.getString(R.string.schedule_qt_session),mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS))));
+        if(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED)).equals("false")){
+            scheduleAdapterViewHolder.tv_confirmation.setText("Não Confirmado");
+            scheduleAdapterViewHolder.tv_confirmation.setTextColor(Color.RED);
+        }else{
+            scheduleAdapterViewHolder.tv_confirmation.setText("Confirmado");
+        }
+
 
     }
 
@@ -116,7 +124,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         int id = 0;
         final ImageView imgCustomer;
         final TextView name_customer,hr_schedule,tp_treatment,name_treatment,
-                tv_qt_sessions,tv_vl_session,tm_treatment;
+                tv_qt_sessions,tv_vl_session,tm_treatment,tv_confirmation;
 
 
         ScheduleAdapterViewHolder(View view) {
@@ -131,6 +139,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             tv_qt_sessions = (TextView)view.findViewById(R.id.tv_qt_session);
             tv_vl_session = (TextView)view.findViewById(R.id.tv_vl_session);
             tm_treatment = (TextView)view.findViewById(R.id.tv_time_treatment);
+            tv_confirmation = (TextView)view.findViewById(R.id.tv_confirmation);
             view.setOnClickListener(this);
         }
 

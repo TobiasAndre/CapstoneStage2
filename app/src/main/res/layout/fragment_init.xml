@@ -25,6 +25,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:id="@+id/tv_current_date"
             android:textSize="12sp"
             android:textAlignment="center"
             android:text="15/07/2017"/>
@@ -32,6 +33,7 @@
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:id="@+id/btnSetDate"
             android:layout_marginBottom="5dp"
             android:scaleType="centerCrop"
             android:background="@color/white"

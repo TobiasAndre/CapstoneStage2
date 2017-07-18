@@ -86,6 +86,7 @@ public class GoEsteticaContract {
         public static final String COLUMN_SCHEDULE_PRICE = "price";
         public static final String COLUMN_SCHEDULE_DATE = "date";
         public static final String COLUMN_SCHEDULE_START_HOUR = "start_hour";
+        public static final String COLUMN_SCHEDULE_CONFIRMED = "confirmed";
         public static final String COLUMN_SCHEDULE_SESSION_MINUTES = "session_minutes";
 
 

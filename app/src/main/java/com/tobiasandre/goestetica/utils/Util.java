@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by TobiasAndre on 22/06/2017.
  */
@@ -49,4 +53,19 @@ public class Util {
             }
         }
     }
+
+    public static String getStringDate(){
+        String mStrDate = "";
+
+        DecimalFormat format = new DecimalFormat("00");
+        int mDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int mYear = Calendar.getInstance().get(Calendar.YEAR);
+        int mMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+
+        mStrDate = format.format(mDay)+"-"+format.format(mMonth)+"-"+mYear;
+
+        return mStrDate;
+    }
+
+
 }

@@ -1,6 +1,8 @@
 package com.tobiasandre.goestetica.ui;
 
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,16 +14,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
 import com.tobiasandre.goestetica.utils.Util;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -33,8 +40,9 @@ public class ScheduleFragment extends Fragment {
     final static String TAG = ScheduleFragment.class.getSimpleName();
     View rootView;
     EditText edDtSchedule,edHrSchedule,edNameCustomer,edNameTreatment,edVlPrice,edQtSessions;
-    ImageButton btFindCustomer,btFindTreatment,btSave;
+    ImageButton btFindCustomer,btFindTreatment,btSave,btnSetDate,btnSetTime;
     Integer idCustomer,idTreatment;
+    CheckBox chkConfirmed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +64,10 @@ public class ScheduleFragment extends Fragment {
         edQtSessions = (EditText)rootView.findViewById(R.id.nr_sessions);
         btFindCustomer = (ImageButton)rootView.findViewById(R.id.btn_find_customer);
         btFindTreatment = (ImageButton)rootView.findViewById(R.id.btn_find_treatment);
+        chkConfirmed = (CheckBox)rootView.findViewById(R.id.checkbox_confirmed);
         btSave = (ImageButton)rootView.findViewById(R.id.btn_save_schedule);
+        btnSetDate = (ImageButton)rootView.findViewById(R.id.btnSetDate);
+        btnSetTime = (ImageButton)rootView.findViewById(R.id.btnSetTime);
 
         if(btFindCustomer!=null){
             btFindCustomer.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +98,33 @@ public class ScheduleFragment extends Fragment {
             });
         }
 
+        if(btnSetDate!=null){
+            btnSetDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+                    int mYear = c.get(Calendar.YEAR);
+                    int mMonth = c.get(Calendar.MONTH);
+                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+                    System.out.println("the selected " + mDay);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            new mDateSetListener(), mYear, mMonth, mDay);
+                    dialog.show();
+                }
+            });
+        }
+        if(btnSetTime!=null){
+            btnSetTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int hour = 0;
+                    int minute = 0;
+                    TimePickerDialog dialog = new TimePickerDialog(getActivity(),new mTimeSetListener(),hour,minute,true);
+                    dialog.show();
+                }
+            });
+        }
+
         cleanFields();
 
         return rootView;
@@ -104,7 +142,11 @@ public class ScheduleFragment extends Fragment {
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE,edVlPrice.getText().toString());
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS,edQtSessions.getText().toString());
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES,"30");
-
+                if(chkConfirmed.isChecked()){
+                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, "true");
+                }else {
+                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, "false");
+                }
                 treatmentValues[0] = value;
 
                 ContentResolver treatmentContentResolver = this.getContext().getContentResolver();
@@ -219,4 +261,31 @@ public class ScheduleFragment extends Fragment {
         return true;
     }
 
+    private class mDateSetListener implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            DecimalFormat format = new DecimalFormat("00");
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            edDtSchedule.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
+                    .append(mYear).append(" "));
+
+            System.out.println(edDtSchedule.getText().toString());
+        }
+    }
+
+    private class mTimeSetListener implements TimePickerDialog.OnTimeSetListener{
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            DecimalFormat format = new DecimalFormat("00");
+            edHrSchedule.setText(format.format(hourOfDay)+":"+format.format(minute));
+        }
+    }
 }

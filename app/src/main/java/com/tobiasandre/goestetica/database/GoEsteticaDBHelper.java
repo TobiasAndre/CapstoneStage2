@@ -54,6 +54,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS + " INTEGER NOT NULL,"+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE + " NUMERIC NOT NULL, "+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR + " STRING NOT NULL,"+
+                        GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED + " STRING NOT NULL,"+
                         GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES + " INTEGER NOT NULL,"+
                 " UNIQUE (" + GoEsteticaContract.ScheduleEntry._ID + ") ON CONFLICT REPLACE);";
         db.execSQL(SQL_CREATE_SCHEDULE_TABLE);
