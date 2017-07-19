@@ -90,6 +90,16 @@
         <item>@string/credit_card</item>
     </string-array>
 
+    <string-array name="result_types">
+        <item>Analitico</item>
+        <item>Sintetico</item>
+    </string-array>
+
+    <string-array name="rel_types">
+        <item>Listagem</item>
+        <item>Gráfico</item>
+    </string-array>
+
     <string-array name="treatment_types">
         <item>Facial</item>
         <item>Corporal</item>
