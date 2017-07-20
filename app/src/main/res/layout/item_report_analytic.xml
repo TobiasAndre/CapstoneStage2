@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:text="19/07/2017"
+            android:id="@+id/tv_dt_schedule"/>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textAlignment="textStart"
+            android:textSize="12dp"
+            android:maxLines="1"
+            android:text="Katiucia Terra Tremea"
+            android:ellipsize="end"
+            android:id="@+id/tv_nm_customer"/>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textAlignment="textStart"
+            android:maxLines="1"
+            android:textSize="12dp"
+            android:text="Micro Agulhamento"
+            android:ellipsize="end"
+            android:id="@+id/tv_nm_treatment"/>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="12dp"
+            android:text="1.000,00"
+            android:textAlignment="textEnd"
+            android:id="@+id/tv_vl_session"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -2,7 +2,9 @@ package com.tobiasandre.goestetica.ui;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -87,6 +89,13 @@ public class HomeFragment extends Fragment implements
         mAdapter = new ScheduleAdapter(getContext(), this);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        SearchManager searchManager =
+                (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView=(SearchView) rootView.findViewById(R.id.find_schedule);
+        searchView.setFocusable(true);
+        searchView.setFocusableInTouchMode(true);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
         if(btnAdd!=null) {
             btnAdd.setOnClickListener(new View.OnClickListener() {
