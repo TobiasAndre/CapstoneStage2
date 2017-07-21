@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class ReportFragment extends Fragment implements
     TextView tvDtInit,tvDtFin;
     Spinner spnReportType,spnResultType;
     ImageButton btnGenerate,btnFindTreatment,btnFindCustomer;
+    EditText edCustomerName,edTreatmentName;
     private RecyclerView mRecyclerView;
     private ReportAdapter mAdapter;
 
@@ -59,6 +61,8 @@ public class ReportFragment extends Fragment implements
 
         idCustomer = 0;
         idTreatment = 0;
+        edCustomerName = (EditText)rootView.findViewById(R.id.ed_customer_name);
+        edTreatmentName = (EditText)rootView.findViewById(R.id.ed_treatment_name);
         tvDtInit = (TextView)rootView.findViewById(R.id.tv_dt_ini);
         tvDtFin = (TextView)rootView.findViewById(R.id.tv_dt_fin);
         spnReportType = (Spinner)rootView.findViewById(R.id.spnReportType);
@@ -66,6 +70,7 @@ public class ReportFragment extends Fragment implements
         btnGenerate = (ImageButton)rootView.findViewById(R.id.btnRunReport);
         btnFindCustomer = (ImageButton)rootView.findViewById(R.id.btn_find_customer);
         btnFindTreatment = (ImageButton)rootView.findViewById(R.id.btn_find_treatment);
+        mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_report);
 
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -117,8 +122,18 @@ public class ReportFragment extends Fragment implements
 
     private void generateReport() {
 
+        String filter = " date between '"+tvDtInit.getText().toString()+"' and '"+tvDtFin.getText().toString()+"'";
+        if(idCustomer>0){
+            filter += " and customer_id = "+idCustomer;
+        }
+        if(idTreatment>0){
+            filter += " and treatment_id = "+idTreatment;
+        }
 
-        getActivity().getSupportLoaderManager().initLoader(ID_REPORT_LOADER, null, this);
+        Bundle bundle = new Bundle();
+        bundle.putString("filter",filter);
+
+        getActivity().getSupportLoaderManager().initLoader(ID_REPORT_LOADER, bundle, this);
 
     }
 
@@ -130,16 +145,43 @@ public class ReportFragment extends Fragment implements
             if(data!=null) {
                 Bundle res = data.getExtras();
                 if (res.containsKey("id")) {
-                    idTreatment = res.getInt("id");
+                    loadTreatment(res.getInt("id"));
                 }
             }
         }else if (requestCode == 3){
             if(data!=null) {
                 Bundle res = data.getExtras();
                 if (res.containsKey("id")) {
-                    idCustomer = res.getInt("id");
+                    loadCustomer(res.getInt("id"));
                 }
             }
+        }
+    }
+
+    private void loadCustomer(int id){
+        Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
+        String selection = GoEsteticaContract.CustomerEntry._ID + " = ?";
+        String[] selectionArguments = new String[]{String.valueOf(id)};
+
+        Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+        if (c != null) {
+            while (c.moveToNext()) {
+                edCustomerName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID)));
+            }
+            c.close();
+        }
+    }
+
+    private void loadTreatment(int id){
+        Uri contentUri = GoEsteticaContract.TreatmentEntry.CONTENT_URI;
+        String selection = GoEsteticaContract.TreatmentEntry._ID + " = ?";
+        String[] selectionArguments = new String[]{String.valueOf(id)};
+        Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+        if (c != null) {
+            while (c.moveToNext()) {
+                edTreatmentName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_TREATMENT_ID)));
+            }
+            c.close();
         }
     }
 
@@ -149,7 +191,6 @@ public class ReportFragment extends Fragment implements
         if(bundle!=null){
             filter = bundle.getString("filter");
         }
-        filter = GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME + " like '%"+filter+"%' ";
         return new CursorLoader(getActivity(),contentUri,null,filter,null,null);
     }
 

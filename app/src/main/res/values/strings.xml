@@ -69,9 +69,16 @@
     <string name="reports">Relatorios \\ Graficos</string>
 
     <!-- Treatment -->
-    <string name="treatment_name">Tratamento : </string>
+    <string name="treatment_name">Tratamento:</string>
     <string name="treatment_description">Descrição :</string>
     <string name="treatment_price">Valor :</string>
+
+    <!-- Report -->
+    <string name="report">Relatório:</string>
+    <string name="report_type"></string>
+    <string name="result_type"></string>
+    <string name="dt_ini">Data Inicial:</string>
+    <string name="dt_fin">Data Final</string>
 
 
     <!-- SnackBar -->
