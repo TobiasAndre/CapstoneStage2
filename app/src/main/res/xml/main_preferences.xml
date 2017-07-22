@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue=""
+        android:defaultValue="http://192.168.0.102"
         android:key="SERVER_ADRESS"
         android:inputType="textUri"
         android:title="Endereço do Servidor:"/>
 
     <EditTextPreference
-        android:defaultValue="8086"
+        android:defaultValue="18080"
         android:key="SERVER_PORT"
         android:inputType="number"
         android:title="Porta:"/>

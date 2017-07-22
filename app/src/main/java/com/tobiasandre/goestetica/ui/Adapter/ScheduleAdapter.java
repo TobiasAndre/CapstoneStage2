@@ -80,13 +80,26 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         selectionArguments = new String[]{String.valueOf(idTreatment)};
         c = mContext.getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
+            int idTreatmentType = 0;
             while (c.moveToNext()) {
                 scheduleAdapterViewHolder.name_treatment.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME)));
-                scheduleAdapterViewHolder.tp_treatment.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE)));
+                idTreatmentType = c.getInt(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE));
                 scheduleAdapterViewHolder.tm_treatment.setText(String.format(mContext.getString(R.string.duration),c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION))));
 
             }
             c.close();
+            if(idTreatmentType>0) {
+                contentUri = GoEsteticaContract.TreatmentTypeEntry.CONTENT_URI;
+                selection = GoEsteticaContract.TreatmentTypeEntry._ID +" = ? ";
+                selectionArguments = new String[]{String.valueOf(idTreatmentType)};
+                c = mContext.getContentResolver().query(contentUri,null,selection,selectionArguments,null);
+                if(c!=null) {
+                    while(c.moveToNext()) {
+                        scheduleAdapterViewHolder.tp_treatment.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentTypeEntry.COLUMN_TREATMENT_TYPE_NAME)));
+                    }
+                    c.close();
+                }
+            }
         }
         DecimalFormat formate = new DecimalFormat("0.00");
         Double vlSession = Double.valueOf(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));

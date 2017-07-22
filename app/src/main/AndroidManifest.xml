@@ -4,9 +4,10 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -24,6 +25,10 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".sync.SyncService"
+            android:exported="false" />
+
         <provider
             android:name=".database.GoEsteticaContentProvider"
             android:authorities="@string/content_authority"
@@ -35,8 +40,9 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/login"
@@ -45,13 +51,14 @@
             android:name=".ui.ImportContactsActivity"
             android:label="@string/import_contacts"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.SettingsActivity"
-            android:parentActivityName=".MainActivity"/>
-
-        <activity android:name=".ui.CustomerListActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ui.TreatmentListActivity"></activity>
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.CustomerListActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ui.TreatmentListActivity" />
+        <activity android:name=".ui.SyncActivity"></activity>
     </application>
 
 </manifest>

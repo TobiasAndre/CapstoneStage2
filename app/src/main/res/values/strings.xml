@@ -80,6 +80,11 @@
     <string name="dt_ini">Data Inicial:</string>
     <string name="dt_fin">Data Final</string>
 
+    <!-- Sync -->
+    <string name="init_sync">Sincronizando...AGUARDE!</string>
+    <string name="sync_types">Sincronizando Tipos de Tratamento...AGUARDE!</string>
+    <string name="sync_treatments">Sincronizando Tratamentos...AGUARDE!</string>
+    <string name="sync_finish">Concluído!</string>
 
     <!-- SnackBar -->
     <string name="required_field">Campo Obrigatório!</string>

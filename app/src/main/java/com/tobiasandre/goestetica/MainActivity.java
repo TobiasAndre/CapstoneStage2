@@ -3,6 +3,8 @@ package com.tobiasandre.goestetica;
 import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.CustomerFragment;
 import com.tobiasandre.goestetica.ui.HomeFragment;
 import com.tobiasandre.goestetica.ui.ImportContactsActivity;
@@ -31,6 +34,7 @@ import com.tobiasandre.goestetica.ui.LoginActivity;
 import com.tobiasandre.goestetica.ui.ReportFragment;
 import com.tobiasandre.goestetica.ui.ScheduleFragment;
 import com.tobiasandre.goestetica.ui.SettingsActivity;
+import com.tobiasandre.goestetica.ui.SyncActivity;
 import com.tobiasandre.goestetica.ui.TreatmentFragment;
 import com.tobiasandre.goestetica.ui.drawer.DataModel;
 import com.tobiasandre.goestetica.ui.drawer.DrawerItemCustomAdapter;
@@ -53,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!checkParameters()){
+            Intent intent = new Intent(this, SyncActivity.class);
+            intent.putExtra("result", "S");
+            startActivityForResult(intent, 2);
+        }
 
         if(ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -221,5 +231,19 @@ public class MainActivity extends AppCompatActivity {
             selectItem(position);
         }
 
+    }
+
+    private boolean checkParameters(){
+        Uri contentUri = GoEsteticaContract.TreatmentTypeEntry.CONTENT_URI;
+        String selection = GoEsteticaContract.TreatmentTypeEntry._ID + " = ?";
+        String[] selectionArguments = new String[]{String.valueOf(1)};
+        Cursor c = this.getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+        if (c != null) {
+            while (c.moveToNext()) {
+                return true;
+            }
+            c.close();
+        }
+        return false;
     }
 }

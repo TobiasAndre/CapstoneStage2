@@ -16,6 +16,7 @@ public class GoEsteticaContract {
     public static final String PATH_CUSTOMER = "customer";
     public static final String PATH_TREATMENT = "treatment";
     public static final String PATH_SCHEDULE = "schedule";
+    public static final String PATH_TREATMENT_TYPE = "treatmenttype";
 
     public static final class CustomerEntry implements BaseColumns {
 
@@ -45,6 +46,25 @@ public class GoEsteticaContract {
         }
 
 
+    }
+
+    public static final class TreatmentTypeEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()
+                .appendPath(PATH_TREATMENT_TYPE)
+                .build();
+
+        public static final String TABLE_NAME="treatmenttype";
+        public static final String COLUMN_TREATMENT_TYPE_NAME = "name";
+
+        public static Uri buildDirUri() {
+            return BASE_CONTENT_URI.buildUpon().appendPath("treatmenttype").build();
+        }
+
+        /** Matches: /items/[_id]/ */
+        public static Uri buildItemUri(long _id) {
+            return BASE_CONTENT_URI.buildUpon().appendPath("treatmenttype").appendPath(Long.toString(_id)).build();
+        }
     }
 
     public static final class TreatmentEntry implements BaseColumns {

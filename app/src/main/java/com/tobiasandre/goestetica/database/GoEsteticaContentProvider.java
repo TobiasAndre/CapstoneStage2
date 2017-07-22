@@ -18,6 +18,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
     public static final int CODE_CUSTOMER = 100;
     public static final int CODE_TREATMENT = 101;
     public static final int CODE_SCHEDULE = 102;
+    public static final int CODE_TREATMENT_TYPE = 103;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private GoEsteticaDBHelper mOpenHelper;
@@ -29,6 +30,7 @@ public class GoEsteticaContentProvider extends ContentProvider {
         matcher.addURI(authority, GoEsteticaContract.PATH_CUSTOMER, CODE_CUSTOMER);
         matcher.addURI(authority, GoEsteticaContract.PATH_TREATMENT, CODE_TREATMENT);
         matcher.addURI(authority, GoEsteticaContract.PATH_SCHEDULE, CODE_SCHEDULE);
+        matcher.addURI(authority, GoEsteticaContract.PATH_TREATMENT_TYPE,CODE_TREATMENT_TYPE);
         return matcher;
     }
 
@@ -60,6 +62,24 @@ public class GoEsteticaContentProvider extends ContentProvider {
                     db.endTransaction();
                 }
 
+                if (rowsInserted > 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+                return rowsInserted;
+
+            case CODE_TREATMENT_TYPE:
+                db.beginTransaction();
+                try{
+                    for(ContentValues value : values){
+                        long _id = db.insert(GoEsteticaContract.TreatmentTypeEntry.TABLE_NAME,null,value);
+                        if (_id != -1) {
+                            rowsInserted++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                }finally {
+                    db.endTransaction();
+                }
                 if (rowsInserted > 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
@@ -117,6 +137,18 @@ public class GoEsteticaContentProvider extends ContentProvider {
                         GoEsteticaContract.CustomerEntry.TABLE_NAME,
                         projection,
                         selection ,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+            }
+
+            case CODE_TREATMENT_TYPE: {
+                cursor = mOpenHelper.getReadableDatabase().query(
+                        GoEsteticaContract.TreatmentTypeEntry.TABLE_NAME,
+                        projection,
+                        selection,
                         selectionArgs,
                         null,
                         null,
@@ -224,6 +256,13 @@ public class GoEsteticaContentProvider extends ContentProvider {
                         selection,
                         selectionArgs);
 
+                break;
+            case CODE_TREATMENT_TYPE:
+                numRowsUpdated = mOpenHelper.getWritableDatabase().update(
+                        GoEsteticaContract.TreatmentTypeEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs);
                 break;
             case CODE_TREATMENT:
 

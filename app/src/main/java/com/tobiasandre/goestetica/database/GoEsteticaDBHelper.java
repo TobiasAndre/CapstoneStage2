@@ -33,6 +33,14 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
 
         db.execSQL(SQL_CREATE_CUSTOMER_TABLE);
 
+        final String SQL_CREATE_TREATMENT_TYPE_TABLE =
+                " CREATE TABLE "+GoEsteticaContract.TreatmentTypeEntry.TABLE_NAME + " ( "+
+                        GoEsteticaContract.TreatmentTypeEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                        GoEsteticaContract.TreatmentTypeEntry.COLUMN_TREATMENT_TYPE_NAME+" STRING NOT NULL,"+
+                " UNIQUE("+GoEsteticaContract.TreatmentTypeEntry._ID+")ON CONFLICT REPLACE);";
+
+        db.execSQL(SQL_CREATE_TREATMENT_TYPE_TABLE);
+
         final String SQL_CREATE_TREATMENT_TABLE =
                 " CREATE TABLE "+ GoEsteticaContract.TreatmentEntry.TABLE_NAME + " ( "+
                     GoEsteticaContract.TreatmentEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -41,7 +49,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE + " NUMERIC, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS + " INTEGER, "+
                     GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION + " STRING,"+
-                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE + " STRING,"+
+                    GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE + " INTEGER NOT NULL,"+
                 " UNIQUE (" + GoEsteticaContract.TreatmentEntry._ID + ") ON CONFLICT REPLACE);";
         db.execSQL(SQL_CREATE_TREATMENT_TABLE);
 
@@ -63,6 +71,7 @@ public class GoEsteticaDBHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ GoEsteticaContract.CustomerEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+ GoEsteticaContract.TreatmentTypeEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ GoEsteticaContract.TreatmentEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ GoEsteticaContract.ScheduleEntry.TABLE_NAME);
         onCreate(db);
