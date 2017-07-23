@@ -1,10 +1,12 @@
 package com.tobiasandre.goestetica.ui;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,7 +57,6 @@ public class HomeFragment extends Fragment implements
     public static final int ID_SCHEDULE_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
     TextView tvTakeSchedule,tvCurrentDate;
-    SearchView searchView;
     ScheduleAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
@@ -90,12 +91,6 @@ public class HomeFragment extends Fragment implements
 
         mRecyclerView.setAdapter(mAdapter);
 
-        SearchManager searchManager =
-                (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView=(SearchView) rootView.findViewById(R.id.find_schedule);
-        searchView.setFocusable(true);
-        searchView.setFocusableInTouchMode(true);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
         if(btnAdd!=null) {
             btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -159,8 +154,6 @@ public class HomeFragment extends Fragment implements
         return new CursorLoader(getContext(),contentUri,null,filter,null,null);
     }
 
-
-
     private void restartLoader(String vWhere){
 
         Bundle bundle = new Bundle();
@@ -213,6 +206,17 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public void open(int position) {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", position);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        ScheduleFragment scheduleFragment = new ScheduleFragment();
+        scheduleFragment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame,scheduleFragment)
+                .addToBackStack(null)
+                .commit();
 
     }
 

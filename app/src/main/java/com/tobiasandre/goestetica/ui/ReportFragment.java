@@ -1,5 +1,6 @@
 package com.tobiasandre.goestetica.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -23,7 +25,10 @@ import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.Adapter.ReportAdapter;
 import com.tobiasandre.goestetica.ui.Adapter.ScheduleAdapter;
+import com.tobiasandre.goestetica.utils.Util;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -35,14 +40,14 @@ public class ReportFragment extends Fragment implements
         ReportAdapter.Callbacks{
 
     private static String TAG = ReportFragment.class.getSimpleName();
-    public static final int ID_REPORT_LOADER = 44;
+    public static final int ID_SCHEDULE_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
     Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
     View rootView;
     int idCustomer,idTreatment;
     TextView tvDtInit,tvDtFin;
     Spinner spnReportType,spnResultType;
-    ImageButton btnGenerate,btnFindTreatment,btnFindCustomer;
+    ImageButton btnGenerate,btnFindTreatment,btnFindCustomer,btnSetDateIni,btnSetDateFin;
     EditText edCustomerName,edTreatmentName;
     private RecyclerView mRecyclerView;
     private ReportAdapter mAdapter;
@@ -70,6 +75,8 @@ public class ReportFragment extends Fragment implements
         btnGenerate = (ImageButton)rootView.findViewById(R.id.btnRunReport);
         btnFindCustomer = (ImageButton)rootView.findViewById(R.id.btn_find_customer);
         btnFindTreatment = (ImageButton)rootView.findViewById(R.id.btn_find_treatment);
+        btnSetDateIni = (ImageButton)rootView.findViewById(R.id.btnSetDateIni);
+        btnSetDateFin = (ImageButton)rootView.findViewById(R.id.btnSetDateFin);
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_report);
 
         LinearLayoutManager layoutManager =
@@ -79,12 +86,46 @@ public class ReportFragment extends Fragment implements
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new ReportAdapter(getContext(), (ReportAdapter.Callbacks) getContext());
+        mAdapter = new ReportAdapter(getContext(), this);
 
         mRecyclerView.setAdapter(mAdapter);
 
-        tvDtInit.setText(new Date().toString());
-        tvDtFin.setText(new Date().toString());
+        if(btnSetDateIni!=null){
+            btnSetDateIni.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+                    int mYear = c.get(Calendar.YEAR);
+                    int mMonth = c.get(Calendar.MONTH);
+                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+                    System.out.println("the selected " + mDay);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            new mDateIniSetListener(), mYear, mMonth, mDay);
+                    dialog.show();
+                }
+            });
+        }
+
+        if(btnSetDateFin!=null){
+            btnSetDateFin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+                    int mYear = c.get(Calendar.YEAR);
+                    int mMonth = c.get(Calendar.MONTH);
+                    int mDay = c.get(Calendar.DAY_OF_MONTH);
+                    System.out.println("the selected " + mDay);
+                    DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+                            new mDateFinSetListener(), mYear, mMonth, mDay);
+                    dialog.show();
+                }
+            });
+        }
+
+        tvDtInit.setText(Util.getStringDate().replace("-","/"));
+        tvDtFin.setText(Util.getStringDate().replace("-","/"));
+
+
 
         if(btnFindTreatment!=null){
             btnFindTreatment.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +156,7 @@ public class ReportFragment extends Fragment implements
             });
         }
 
-        getActivity().getSupportLoaderManager().initLoader(ID_REPORT_LOADER, null, this);
+        getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, null, this);
 
         return rootView;
     }
@@ -133,7 +174,7 @@ public class ReportFragment extends Fragment implements
         Bundle bundle = new Bundle();
         bundle.putString("filter",filter);
 
-        getActivity().getSupportLoaderManager().initLoader(ID_REPORT_LOADER, bundle, this);
+        getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, bundle, this);
 
     }
 
@@ -166,7 +207,7 @@ public class ReportFragment extends Fragment implements
         Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
             while (c.moveToNext()) {
-                edCustomerName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID)));
+                edCustomerName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.CustomerEntry.COLUMN_CUSTOMER_NAME)));
             }
             c.close();
         }
@@ -179,7 +220,7 @@ public class ReportFragment extends Fragment implements
         Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
             while (c.moveToNext()) {
-                edTreatmentName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_TREATMENT_ID)));
+                edTreatmentName.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME)));
             }
             c.close();
         }
@@ -222,5 +263,45 @@ public class ReportFragment extends Fragment implements
     @Override
     public void open(int position) {
 
+    }
+
+    private class mDateIniSetListener implements DatePickerDialog.OnDateSetListener{
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            DecimalFormat format = new DecimalFormat("00");
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            tvDtInit.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
+                    .append(mYear).append(" "));
+
+            System.out.println(tvDtInit.getText().toString());
+
+        }
+    }
+
+    private class mDateFinSetListener implements DatePickerDialog.OnDateSetListener{
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            DecimalFormat format = new DecimalFormat("00");
+            int mYear = year;
+            int mMonth = monthOfYear;
+            int mDay = dayOfMonth;
+            tvDtFin.setText(new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
+                    .append(mYear).append(" "));
+
+            System.out.println(tvDtFin.getText().toString());
+
+        }
     }
 }

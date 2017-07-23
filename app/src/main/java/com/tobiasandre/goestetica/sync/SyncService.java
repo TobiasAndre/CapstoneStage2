@@ -97,6 +97,7 @@ public class SyncService extends IntentService {
                 value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION,t.getDescription());
                 value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_SESSIONS,t.getSessions());
                 value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE,t.getPrice());
+                value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DURATION,t.getDuration());
                 value.put(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_TYPE,t.getType());
                 treatmentValues[0] = value;
 

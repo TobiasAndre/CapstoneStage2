@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:textStyle="bold"
-            android:text="Data: "/>
+            android:text="@string/date"/>
 
         <TextView
             android:layout_width="80dp"
@@ -27,8 +27,7 @@
             android:layout_marginBottom="5dp"
             android:id="@+id/tv_current_date"
             android:textSize="12sp"
-            android:textAlignment="center"
-            android:text="15/07/2017"/>
+            android:textAlignment="center"/>
 
         <ImageButton
             android:layout_width="30dp"
@@ -37,14 +36,18 @@
             android:layout_marginBottom="5dp"
             android:scaleType="centerCrop"
             android:background="@color/white"
+            android:contentDescription="@string/date"
             android:src="@mipmap/ic_calendar"/>
 
+
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="48dp">
 
         <View
             android:layout_width="match_parent"
@@ -64,15 +67,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:orientation="vertical">
-
-        <android.support.v7.widget.SearchView
-            android:id="@+id/find_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            app:queryHint="@string/find"
-            app:iconifiedByDefault="false" />
-
 
         <ScrollView
             android:layout_width="match_parent"

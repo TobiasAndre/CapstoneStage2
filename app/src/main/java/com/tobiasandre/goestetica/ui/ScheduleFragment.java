@@ -41,13 +41,19 @@ public class ScheduleFragment extends Fragment {
     View rootView;
     EditText edDtSchedule,edHrSchedule,edNameCustomer,edNameTreatment,edVlPrice,edQtSessions;
     ImageButton btFindCustomer,btFindTreatment,btSave,btnSetDate,btnSetTime;
-    Integer idCustomer,idTreatment;
+    Integer idCustomer,idTreatment,idSchedule;
     CheckBox chkConfirmed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
+        if(savedInstanceState!=null){
+            idSchedule = savedInstanceState.getInt("id");
+        }else{
+            idSchedule = -1;
+        }
 
         setHasOptionsMenu(true);
     }

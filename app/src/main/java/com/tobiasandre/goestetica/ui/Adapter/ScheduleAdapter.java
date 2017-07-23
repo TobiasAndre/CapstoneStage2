@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 
@@ -24,14 +23,14 @@ import java.text.DecimalFormat;
  * Created by TobiasAndre on 13/07/2017.
  */
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterViewHolder>  {
 
     private final static String TAG = ScheduleAdapter.class.getSimpleName();
-
     private final Context mContext;
     private Cursor mCursor;
 
     private final Callbacks mCallbacks;
+
 
     public interface Callbacks {
         void open(int position);
@@ -164,5 +163,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             mCallbacks.open(id);
         }
     }
+
+
 
 }
