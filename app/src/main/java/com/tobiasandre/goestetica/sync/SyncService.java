@@ -41,7 +41,7 @@ public class SyncService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final String serverAddress = sharedPreferences.getString(SERVER_ADDRESS,"http://192.168.0.102");
+        final String serverAddress = sharedPreferences.getString(SERVER_ADDRESS,"http://192.168.0.105");
         final String serverPort = sharedPreferences.getString(SERVER_PORT,"18080");
 
         final ResultReceiver receiver = intent.getParcelableExtra("receiver");

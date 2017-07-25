@@ -25,7 +25,10 @@
     <string name="type">Tipo:</string>
     <string name="action_image_selection">Selecionar Imagem</string>
     <string name="action_take_picture">Tirar Foto</string>
-
+    <string name="schedulings">Agendamentos:</string>
+    <string name="confirmations">Confirmações:</string>
+    <string name="time_available">Disponibilidade:</string>
+    <string name="resume">Resumo Diário:</string>
     <!-- Import Contact -->
     <string name="contact_name">Nome:</string>
     <string name="contact_phone">Telefone:</string>

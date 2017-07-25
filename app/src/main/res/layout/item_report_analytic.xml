@@ -29,7 +29,7 @@
             android:id="@+id/tv_nm_customer"/>
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textAlignment="textStart"
@@ -40,7 +40,7 @@
             android:id="@+id/tv_nm_treatment"/>
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textSize="12dp"
