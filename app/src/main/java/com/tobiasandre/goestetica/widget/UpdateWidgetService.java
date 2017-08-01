@@ -1,15 +1,16 @@
 package com.tobiasandre.goestetica.widget;
 
-import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
+import android.widget.RemoteViewsService;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
@@ -21,7 +22,7 @@ import java.text.DecimalFormat;
  * Created by TobiasAndre on 24/07/2017.
  */
 
-public class UpdateWidgetService extends Service {
+public class UpdateWidgetService extends RemoteViewsService {
 
     private int mQtScheduling = 0;
     private int mQtConfirmations = 0;
@@ -33,13 +34,25 @@ public class UpdateWidgetService extends Service {
     }
 
     @Override
+    public RemoteViewsFactory onGetViewFactory(Intent intent) {
+        System.out.println("=============== WIDGET onGetViewFactory==================");
+        return new StackRemoteViewsFactory(this.getApplicationContext(), intent);
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        System.out.println("=============== WIDGET onStartCommand==================");
 
         DecimalFormat formato = new DecimalFormat("00");
 
         RemoteViews view = new RemoteViews(getPackageName(), R.layout.widget_layout);
         Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
-        String selection = GoEsteticaContract.ScheduleEntry._ID + " = ?";
+        DecimalFormat decimalFormat = new DecimalFormat("00");
+        int mDay = 31;
+        int mMonth = 7;
+        int mYear = 2017;
+        String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+Util.getStringDate().replace("/","-").trim()+"' and '"+decimalFormat.format(mDay+1)+"-"+decimalFormat.format(mMonth+1)+"-"+mYear+"'";
         String[] selectionArguments = new String[]{String.valueOf("")};
         Cursor c = getBaseContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
@@ -57,7 +70,61 @@ public class UpdateWidgetService extends Service {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         manager.updateAppWidget(theWidget, view);
 
+        System.out.println("=============== WIDGET onStartCommand return ==================");
 
         return super.onStartCommand(intent, flags, startId);
+    }
+}
+
+class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+    private Context mContext;
+
+    public StackRemoteViewsFactory(Context context, Intent intent) {
+        mContext = context;
+    }
+
+    @Override
+    public void onCreate() {
+
+    }
+
+    @Override
+    public void onDataSetChanged() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public RemoteViews getViewAt(int position) {
+        return null;
+    }
+
+    @Override
+    public RemoteViews getLoadingView() {
+        return null;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 }

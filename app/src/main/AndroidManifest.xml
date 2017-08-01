@@ -52,7 +52,9 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <service android:name=".widget.UpdateWidgetService"/>
+        <service android:name=".widget.UpdateWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity
             android:name=".ui.LoginActivity"

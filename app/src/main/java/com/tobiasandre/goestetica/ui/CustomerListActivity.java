@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -35,11 +36,14 @@ public class CustomerListActivity extends AppCompatActivity implements
     private CustomerAdapter mCustomerAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
+    private FloatingActionButton fbAddCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
+
+        fbAddCustomer = (FloatingActionButton)findViewById(R.id.fab_add_customer);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_customers);
 
@@ -73,6 +77,13 @@ public class CustomerListActivity extends AppCompatActivity implements
             public boolean onQueryTextChange(String newText) {
                 restartLoader(newText);
                 return false;
+            }
+        });
+
+        fbAddCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

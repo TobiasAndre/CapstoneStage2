@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.CursorLoader;
@@ -33,12 +34,15 @@ public class TreatmentListActivity extends AppCompatActivity implements
     private TreatmentAdapter mTreatmentAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
+    private FloatingActionButton fbAddTreatment;
     SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treatment_list);
+
+        fbAddTreatment = (FloatingActionButton)findViewById(R.id.fab_add_treatment);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_treatments);
 
@@ -74,6 +78,13 @@ public class TreatmentListActivity extends AppCompatActivity implements
             public boolean onQueryTextChange(String newText) {
                 restartLoader(newText);
                 return false;
+            }
+        });
+
+        fbAddTreatment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
