@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "718642949546",
+    "firebase_url": "https://goestetica-a6500.firebaseio.com",
+    "project_id": "goestetica-a6500",
+    "storage_bucket": "goestetica-a6500.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718642949546:android:1cc96f6746d83c01",
+        "android_client_info": {
+          "package_name": "com.tobiasandre.goestetica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718642949546-i5mgj9qk1j9kcp3svff7bg347jg3hf1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tobiasandre.goestetica",
+            "certificate_hash": "be37058b9feb975dc760fa5b522a71cc4effc292"
+          }
+        },
+        {
+          "client_id": "718642949546-m2ufdjv1pf8h2u92bmp0it88oqd620u5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tobiasandre.goestetica",
+            "certificate_hash": "4759c2ccc066da05ed1ec8644af149ec4cc6d586"
+          }
+        },
+        {
+          "client_id": "718642949546-b3vs03pdqbdbq060grgbcjljqil02eqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB81nnA1Ca6KscWuqs4-dC4HQv0z2YGZ8E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718642949546-b3vs03pdqbdbq060grgbcjljqil02eqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
