@@ -129,7 +129,6 @@ public class CustomerListActivity extends AppCompatActivity implements
                 finish();
             }
         }else{
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
             showCustomerDataView();
         }
     }
@@ -139,7 +138,6 @@ public class CustomerListActivity extends AppCompatActivity implements
         if(mCustomerAdapter!=null)
             mCustomerAdapter.swapCursor(null);
         else {
-            Log.v(TAG, "OnLoadFinished: mAdapter is null");
             showCustomerDataView();
         }
     }

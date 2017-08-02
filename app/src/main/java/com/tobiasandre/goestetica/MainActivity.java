@@ -199,8 +199,6 @@ public class MainActivity extends AppCompatActivity {
             setTitle(mNavigationDrawerItemTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
 
-        } else {
-            Log.e(TAG, "Error creating fragment");
         }
     }
 

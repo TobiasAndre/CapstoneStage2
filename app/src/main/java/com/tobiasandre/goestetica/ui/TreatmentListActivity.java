@@ -134,8 +134,6 @@ public class TreatmentListActivity extends AppCompatActivity implements
                 showCustomerDataView();
                 finish();
             }
-        }else{
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
         }
     }
 
@@ -143,8 +141,6 @@ public class TreatmentListActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         if(mTreatmentAdapter!=null)
             mTreatmentAdapter.swapCursor(null);
-        else
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
     }
 
     @Override

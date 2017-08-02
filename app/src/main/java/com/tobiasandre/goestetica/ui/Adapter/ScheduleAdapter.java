@@ -100,16 +100,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
                 }
             }
         }
-        DecimalFormat formate = new DecimalFormat("0.00");
+        DecimalFormat formate = new DecimalFormat(mContext.getString(R.string.default_value_format));
         Double vlSession = Double.valueOf(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));
         scheduleAdapterViewHolder.tv_vl_session.setText(String.format(mContext.getString(R.string.schedule_vl_session),formate.format(vlSession)));
         scheduleAdapterViewHolder.hr_schedule.setText(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR)));
         scheduleAdapterViewHolder.tv_qt_sessions.setText(String.format(mContext.getString(R.string.schedule_qt_session),mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS))));
-        if(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED)).equals("false")){
-            scheduleAdapterViewHolder.tv_confirmation.setText("Não Confirmado");
+        if(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED)).equals(mContext.getString(R.string.default_boolean_false))){
+            scheduleAdapterViewHolder.tv_confirmation.setText(mContext.getString(R.string.schedule_not_confirmed));
             scheduleAdapterViewHolder.tv_confirmation.setTextColor(Color.RED);
         }else{
-            scheduleAdapterViewHolder.tv_confirmation.setText("Confirmado");
+            scheduleAdapterViewHolder.tv_confirmation.setText(mContext.getString(R.string.schedule_confirmation));
         }
 
 

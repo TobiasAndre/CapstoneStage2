@@ -181,7 +181,6 @@ public class HomeFragment extends Fragment implements
                 showCustomerDataView();
             }
         }else{
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
             showCustomerDataView();
         }
     }
@@ -191,7 +190,6 @@ public class HomeFragment extends Fragment implements
         if(mAdapter!=null)
             mAdapter.swapCursor(null);
         else {
-            Log.v(TAG, "OnLoadFinished: mAdapter is null");
             showCustomerDataView();
         }
     }

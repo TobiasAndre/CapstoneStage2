@@ -36,6 +36,8 @@
     <string name="default_boolean_true">true</string>
     <string name="default_boolean_false">false</string>
     <string name="default_time_session">60</string>
+    <string name="default_empty_string"></string>
+
     <!-- Import Contact -->
     <string name="contact_name">Nome:</string>
     <string name="contact_phone">Telefone:</string>
@@ -65,11 +67,14 @@
     <string name="btn_find_treatment">Selecionar Tratamento</string>
     <string name="confirmation">Confirmado?</string>
     <string name="run_report">Gerar Relatorio</string>
+    <string name="image_gallery">Select Image From Gallery</string>
+    <string name="authentication_failed">Authentication failed.</string>
 
     <!-- Schedule List -->
     <string name="schedule_qt_session">Sessões : %s</string>
     <string name="schedule_vl_session">Valor : %s</string>
     <string name="schedule_confirmation">Confirmado!</string>
+    <string name="schedule_not_confirmed">Não Confirmado</string>
     <string name="schedule_duration">Duração:</string>
 
     <string name="credit_card">Cartao de Credito</string>

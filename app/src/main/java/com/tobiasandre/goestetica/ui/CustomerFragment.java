@@ -376,7 +376,7 @@ public class CustomerFragment extends Fragment {
         GalIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        startActivityForResult(Intent.createChooser(GalIntent, "Select Image From Gallery"), 2);
+        startActivityForResult(Intent.createChooser(GalIntent, getString(R.string.image_gallery)), 2);
 
     }
 

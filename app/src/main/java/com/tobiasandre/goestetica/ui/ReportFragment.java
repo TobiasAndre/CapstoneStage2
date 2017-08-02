@@ -256,8 +256,6 @@ public class ReportFragment extends Fragment implements
 
             mRecyclerView.smoothScrollToPosition(mPosition);
 
-        }else{
-            Log.v(TAG,"OnLoadFinished: mAdapter is null");
         }
     }
 
@@ -265,9 +263,6 @@ public class ReportFragment extends Fragment implements
     public void onLoaderReset(Loader<Cursor> loader) {
         if(mAdapter!=null)
             mAdapter.swapCursor(null);
-        else {
-            Log.v(TAG, "OnLoadFinished: mAdapter is null");
-        }
     }
 
     @Override

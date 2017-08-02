@@ -174,11 +174,11 @@ public class TreatmentFragment extends Fragment {
     }
 
     private void clearFields(){
-        edName.setText("");
-        edDescription.setText("");
-        edPrice.setText("0,00");
-        edSessions.setText("1");
-        edDuration.setText("01:00");
+        edName.setText(getString(R.string.default_empty_string));
+        edDescription.setText(getString(R.string.default_empty_string));
+        edPrice.setText(getString(R.string.price_default));
+        edSessions.setText(getString(R.string.qt_default));
+        edDuration.setText(getString(R.string.default_time_session));
         typeTreatment.setSelection(0);
         edName.requestFocus();
     }

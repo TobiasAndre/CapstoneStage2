@@ -57,7 +57,7 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.Trea
         treatmentAdapterViewHolder.name.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_NAME)));
         treatmentAdapterViewHolder.description.setText(mCursor.getString(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_DESCRIPTION)));
         Double vlprice = mCursor.getDouble(mCursor.getColumnIndex(GoEsteticaContract.TreatmentEntry.COLUMN_TREATMENT_PRICE));
-        DecimalFormat format = new DecimalFormat("0.00");
+        DecimalFormat format = new DecimalFormat(mContext.getString(R.string.default_value_format));
         treatmentAdapterViewHolder.price.setText(format.format(vlprice));
     }
 
