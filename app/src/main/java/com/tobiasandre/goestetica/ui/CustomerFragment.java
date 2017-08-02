@@ -5,26 +5,22 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +30,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
-import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
+import com.tobiasandre.goestetica.utils.TypeSnackBar;
 import com.tobiasandre.goestetica.utils.Util;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -254,11 +246,11 @@ public class CustomerFragment extends Fragment {
 
     private Boolean validateRequired(){
         if(edCustomerName.getText().toString().isEmpty()){
-            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_name)),Snackbar.LENGTH_LONG,TypeSnackBar.ERROR).show();
             return false;
         }
         if(edCustomerCellPhone.getText().toString().isEmpty()){
-            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,getString(R.string.required_field).concat("-").concat(getString(R.string.customer_cellphone)),Snackbar.LENGTH_LONG,TypeSnackBar.ERROR).show();
             return false;
         }
         return true;
@@ -303,12 +295,12 @@ public class CustomerFragment extends Fragment {
             }
 
 
-            Util.makeSnackbar(rootView,getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
+            Util.makeSnackbar(rootView,getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TypeSnackBar.SUCCESS).show();
 
             ClearFields();
 
         }catch (Exception error){
-            Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TypeSnackBar.ERROR).show();
         }
     }
 
@@ -361,7 +353,7 @@ public class CustomerFragment extends Fragment {
                 Manifest.permission.CAMERA))
         {
 
-            Toast.makeText(getActivity(),"CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),getString(R.string.camera_permission), Toast.LENGTH_LONG).show();
 
         } else {
 

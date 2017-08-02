@@ -22,7 +22,7 @@ import android.widget.TimePicker;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
-import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
+import com.tobiasandre.goestetica.utils.TypeSnackBar;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.text.DecimalFormat;
@@ -170,12 +170,12 @@ public class ScheduleFragment extends Fragment {
                 }else{
                     treatmentContentResolver.update(GoEsteticaContract.ScheduleEntry.CONTENT_URI,value,GoEsteticaContract.ScheduleEntry._ID +" = ?",new String[]{String.valueOf(idSchedule)});
                 }
-                Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
+                Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TypeSnackBar.SUCCESS).show();
 
                 cleanFields();
 
             }catch (Exception error){
-                Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+                Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TypeSnackBar.ERROR).show();
             }
         }
     }
@@ -288,12 +288,12 @@ public class ScheduleFragment extends Fragment {
             edVlPrice.setText("0,00");
         }
         if(edNameTreatment.getText().toString().isEmpty()){
-            Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TypeSnackBar.ERROR).show();
             edNameTreatment.requestFocus();
             return false;
         }
         if(edNameCustomer.getText().toString().isEmpty()){
-            Util.makeSnackbar(rootView,getString(R.string.customer_required), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,getString(R.string.customer_required), Snackbar.LENGTH_LONG, TypeSnackBar.ERROR).show();
             edNameCustomer.requestFocus();
             return false;
         }

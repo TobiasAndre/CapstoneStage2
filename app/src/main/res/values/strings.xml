@@ -69,6 +69,7 @@
     <string name="run_report">Gerar Relatorio</string>
     <string name="image_gallery">Select Image From Gallery</string>
     <string name="authentication_failed">Authentication failed.</string>
+    <string name="camera_permission">CAMERA permission allows us to Access CAMERA app</string>
 
     <!-- Schedule List -->
     <string name="schedule_qt_session">Sessões : %s</string>

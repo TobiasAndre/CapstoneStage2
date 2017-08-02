@@ -18,22 +18,22 @@ import java.util.Date;
 public class Util {
 
     @NonNull
-    public static Snackbar makeSnackbar(@NonNull View layout, @NonNull CharSequence  text, int duration,TYPE_SNACKBAR type){
+    public static Snackbar makeSnackbar(@NonNull View layout, @NonNull CharSequence  text, int duration,TypeSnackBar type){
         Snackbar snackBarView = Snackbar.make(layout, text, duration);
         snackBarView.getView().setBackgroundColor(Color.BLACK);
         TextView tv = (TextView) snackBarView.getView().findViewById(android.support.design.R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
 
-        if(type == TYPE_SNACKBAR.ERROR) {
+        if(type == TypeSnackBar.ERROR) {
             snackBarView.getView().setBackgroundColor(Color.RED);
             tv.setTextColor(Color.WHITE);
-        }else if (type==TYPE_SNACKBAR.ALERT){
+        }else if (type==TypeSnackBar.ALERT){
             snackBarView.getView().setBackgroundColor(Color.YELLOW);
             tv.setTextColor(Color.BLACK);
-        }else if(type==TYPE_SNACKBAR.MESSAGE){
+        }else if(type==TypeSnackBar.MESSAGE){
             snackBarView.getView().setBackgroundColor(Color.BLUE);
             tv.setTextColor(Color.WHITE);
-        }else if(type==TYPE_SNACKBAR.SUCCESS){
+        }else if(type==TypeSnackBar.SUCCESS){
             snackBarView.getView().setBackgroundColor(Color.GREEN);
             tv.setTextColor(Color.BLACK);
         }

@@ -19,7 +19,7 @@ import android.widget.Spinner;
 
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
-import com.tobiasandre.goestetica.utils.TYPE_SNACKBAR;
+import com.tobiasandre.goestetica.utils.TypeSnackBar;
 import com.tobiasandre.goestetica.utils.Util;
 
 /**
@@ -130,7 +130,7 @@ public class TreatmentFragment extends Fragment {
             edSessions.setText("1");
         }
         if(edName.getText().toString().isEmpty()){
-            Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TypeSnackBar.ERROR).show();
             edName.requestFocus();
             return false;
         }
@@ -164,12 +164,12 @@ public class TreatmentFragment extends Fragment {
                         treatmentValues);
             }
 
-            Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
+            Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TypeSnackBar.SUCCESS).show();
 
             clearFields();
 
         }catch (Exception error){
-            Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TYPE_SNACKBAR.ERROR).show();
+            Util.makeSnackbar(rootView,TAG.concat(":").concat(getString(R.string.general_error)).concat(" - ").concat(error.getMessage()),Snackbar.LENGTH_LONG,TypeSnackBar.ERROR).show();
         }
     }
 
