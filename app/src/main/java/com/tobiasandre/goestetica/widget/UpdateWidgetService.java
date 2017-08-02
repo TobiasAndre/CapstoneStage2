@@ -52,16 +52,19 @@ public class UpdateWidgetService extends RemoteViewsService {
         int mDay = 31;
         int mMonth = 7;
         int mYear = 2017;
-        String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+Util.getStringDate().replace("/","-").trim()+"' and '"+decimalFormat.format(mDay+1)+"-"+decimalFormat.format(mMonth+1)+"-"+mYear+"'";
-        String[] selectionArguments = new String[]{String.valueOf("")};
-        Cursor c = getBaseContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
-        if (c != null) {
-            while (c.moveToNext()) {
-                mQtScheduling++;
+        try {
+            String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate().replace("/", "-").trim() + "' and '" + decimalFormat.format(mDay + 1) + "-" + decimalFormat.format(mMonth + 1) + "-" + mYear + "'";
+            String[] selectionArguments = new String[]{String.valueOf("")};
+            Cursor c = getBaseContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+            if (c != null) {
+                while (c.moveToNext()) {
+                    mQtScheduling++;
+                }
+                c.close();
             }
-            c.close();
+        }catch (Exception error){
+            System.out.println(error.getMessage());
         }
-
         view.setTextViewText(R.id.id_qt_schedule, formato.format(mQtScheduling));
         view.setTextViewText(R.id.id_qt_confirmations,formato.format(mQtConfirmations));
 
@@ -105,7 +108,9 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-        return null;
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_layout);
+
+        return rv;
     }
 
     @Override

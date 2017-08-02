@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 
+import java.text.DecimalFormat;
+
 
 /**
  * Created by TobiasAndre on 19/07/2017.
@@ -75,7 +77,10 @@ public class ReportAdapter  extends RecyclerView.Adapter<ReportAdapter.ReportAda
                 c.close();
             }
         }
-        reportAdapterViewHolder.tvVlSession.setText(mCursor.getString(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));
+
+        DecimalFormat decimalFormat = new DecimalFormat(mContext.getString(R.string.default_value_format));
+
+        reportAdapterViewHolder.tvVlSession.setText(decimalFormat.format(mCursor.getDouble(mCursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE))));
     }
 
     @Override

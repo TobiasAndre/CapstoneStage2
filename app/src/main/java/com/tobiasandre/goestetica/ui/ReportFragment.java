@@ -40,7 +40,7 @@ public class ReportFragment extends Fragment implements
         ReportAdapter.Callbacks{
 
     private static String TAG = ReportFragment.class.getSimpleName();
-    public static final int ID_SCHEDULE_LOADER = 44;
+    public static final int ID_SCHEDULE_LOADER = 102;
     private int mPosition = RecyclerView.NO_POSITION;
     Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
     View rootView;
@@ -163,6 +163,8 @@ public class ReportFragment extends Fragment implements
 
     private void generateReport() {
 
+        mAdapter.swapCursor(null);
+
         String filter = " date between '"+tvDtInit.getText().toString()+"' and '"+tvDtFin.getText().toString()+"'";
         if(idCustomer>0){
             filter += " and customer_id = "+idCustomer;
@@ -174,7 +176,7 @@ public class ReportFragment extends Fragment implements
         Bundle bundle = new Bundle();
         bundle.putString("filter",filter);
 
-        getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, bundle, this);
+        getActivity().getSupportLoaderManager().restartLoader(ID_SCHEDULE_LOADER, bundle, this);
 
     }
 
@@ -200,9 +202,10 @@ public class ReportFragment extends Fragment implements
     }
 
     private void loadCustomer(int id){
+        idCustomer = id;
         Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
         String selection = GoEsteticaContract.CustomerEntry._ID + " = ?";
-        String[] selectionArguments = new String[]{String.valueOf(id)};
+        String[] selectionArguments = new String[]{String.valueOf(idCustomer)};
 
         Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
@@ -214,9 +217,10 @@ public class ReportFragment extends Fragment implements
     }
 
     private void loadTreatment(int id){
+        idTreatment = id;
         Uri contentUri = GoEsteticaContract.TreatmentEntry.CONTENT_URI;
         String selection = GoEsteticaContract.TreatmentEntry._ID + " = ?";
-        String[] selectionArguments = new String[]{String.valueOf(id)};
+        String[] selectionArguments = new String[]{String.valueOf(idTreatment)};
         Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
         if (c != null) {
             while (c.moveToNext()) {
@@ -228,7 +232,13 @@ public class ReportFragment extends Fragment implements
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
-        String filter = "";
+        String filter = " date between '"+tvDtInit.getText().toString()+"' and '"+tvDtFin.getText().toString()+"'";
+        if(idCustomer>0){
+            filter += " and customer_id = "+idCustomer;
+        }
+        if(idTreatment>0){
+            filter += " and treatment_id = "+idTreatment;
+        }
         if(bundle!=null){
             filter = bundle.getString("filter");
         }

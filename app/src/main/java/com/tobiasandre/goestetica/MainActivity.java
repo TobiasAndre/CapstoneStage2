@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
         selectItem(0);
 
-
     }
 
     private void initMenu(){

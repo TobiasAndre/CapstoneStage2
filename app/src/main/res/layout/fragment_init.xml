@@ -93,9 +93,6 @@
             android:textAlignment="center"
             android:text="@string/take_schedule"/>
 
-
-
-
     </LinearLayout>
 
 

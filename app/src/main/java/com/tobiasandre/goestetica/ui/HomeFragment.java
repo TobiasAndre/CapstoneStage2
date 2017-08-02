@@ -45,18 +45,18 @@ public class HomeFragment extends Fragment implements
     Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
     public static final int ID_SCHEDULE_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
-    TextView tvTakeSchedule,tvCurrentDate;
-    ScheduleAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
     private ImageButton btnSetDate;
+    TextView tvTakeSchedule,tvCurrentDate;
+    ScheduleAdapter mAdapter;
     FloatingActionButton btnAdd;
-
-
+    DecimalFormat format;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_init, container, false);
+        format = new DecimalFormat("00");
 
         btnAdd = (FloatingActionButton)rootView.findViewById(R.id.fab_add_scheduling);
         tvTakeSchedule = (TextView)rootView.findViewById(R.id.tv_take_schedule);
@@ -113,7 +113,11 @@ public class HomeFragment extends Fragment implements
             });
         }
 
-        getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, null, this);
+        Bundle bundle = new Bundle();
+        bundle.putString("filter",GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + tvCurrentDate.getText().toString().replace("/","-").trim() +
+                "' and '"+(Integer.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+1))+"-"+format.format(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1))+"-"+Calendar.getInstance().get(Calendar.YEAR)+"'");
+
+        getActivity().getSupportLoaderManager().initLoader(ID_SCHEDULE_LOADER, bundle , this);
 
         return rootView;
     }
@@ -132,14 +136,13 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-        String filter = "";
+
+        String filter = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + tvCurrentDate.getText().toString().replace("/","-").trim() +
+                "' and '"+(Integer.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+1))+"-"+format.format(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1))+"-"+Calendar.getInstance().get(Calendar.YEAR)+"'";
         if(bundle!=null){
             filter = bundle.getString("filter");
-        }else {
-            DecimalFormat format = new DecimalFormat("00");
-            filter += GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate() +
-                    "' and '"+(Integer.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))+1)+"-"+format.format(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1))+"-"+Calendar.getInstance().get(Calendar.YEAR)+"'";
         }
+
         return new CursorLoader(getContext(),contentUri,null,filter,null,null);
     }
 
@@ -226,8 +229,9 @@ public class HomeFragment extends Fragment implements
                     .append(mYear).append(" "));
 
             System.out.println(tvCurrentDate.getText().toString());
+            String vWhere = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+tvCurrentDate.getText().toString().replace("/","-").trim()+"' and '"+format.format(mDay+1)+"-"+format.format(mMonth+1)+"-"+mYear+"'";
 
-            restartLoader(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+tvCurrentDate.getText().toString().replace("/","-").trim()+"' and '"+format.format(mDay+1)+"-"+format.format(mMonth+1)+"-"+mYear+"'");
+            restartLoader(vWhere);
 
         }
     }

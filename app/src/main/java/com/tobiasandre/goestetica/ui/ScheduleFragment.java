@@ -49,11 +49,6 @@ public class ScheduleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        if(savedInstanceState!=null){
-            idSchedule = savedInstanceState.getInt("id");
-        }else{
-            idSchedule = -1;
-        }
 
         setHasOptionsMenu(true);
     }
@@ -61,6 +56,13 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.schedule_fragment, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            idSchedule = bundle.getInt("id");
+        }else{
+            idSchedule = -1;
+        }
 
         edDtSchedule = (EditText)rootView.findViewById(R.id.dt_schedule);
         edHrSchedule = (EditText)rootView.findViewById(R.id.hr_schedule);
@@ -133,6 +135,10 @@ public class ScheduleFragment extends Fragment {
 
         cleanFields();
 
+        if(idSchedule > 0){
+            loadSchedule(idSchedule);
+        }
+
         return rootView;
     }
 
@@ -147,20 +153,23 @@ public class ScheduleFragment extends Fragment {
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR,edHrSchedule.getText().toString());
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE,edVlPrice.getText().toString());
                 value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS,edQtSessions.getText().toString());
-                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES,"30");
+                value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSION_MINUTES,getString(R.string.default_time_session));
                 if(chkConfirmed.isChecked()){
-                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, "true");
+                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, getString(R.string.default_boolean_true));
                 }else {
-                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, "false");
+                    value.put(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED, getString(R.string.default_boolean_false));
                 }
                 treatmentValues[0] = value;
 
                 ContentResolver treatmentContentResolver = this.getContext().getContentResolver();
 
-                treatmentContentResolver.bulkInsert(
-                        GoEsteticaContract.ScheduleEntry.CONTENT_URI,
-                        treatmentValues);
-
+                if(idSchedule<0) {
+                    treatmentContentResolver.bulkInsert(
+                            GoEsteticaContract.ScheduleEntry.CONTENT_URI,
+                            treatmentValues);
+                }else{
+                    treatmentContentResolver.update(GoEsteticaContract.ScheduleEntry.CONTENT_URI,value,GoEsteticaContract.ScheduleEntry._ID +" = ?",new String[]{String.valueOf(idSchedule)});
+                }
                 Util.makeSnackbar(rootView, getString(R.string.save_sucess), Snackbar.LENGTH_LONG, TYPE_SNACKBAR.SUCCESS).show();
 
                 cleanFields();
@@ -172,19 +181,18 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void cleanFields(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.default_date_format));
         Date date = new Date();
         String sDate= sdf.format(date);
         edDtSchedule.setText(sDate);
-        sdf = new SimpleDateFormat("HH:mm");
+        sdf = new SimpleDateFormat(getString(R.string.default_time_format));
         edHrSchedule.setText(sdf.format(date));
-        edQtSessions.setText("1");
-        edVlPrice.setText("0,00");
-        edNameCustomer.setText("");
-        edNameTreatment.setText("");
+        edQtSessions.setText(getString(R.string.qt_default));
+        edVlPrice.setText(getString(R.string.price_default));
+        edNameCustomer.setText(getString(R.string.field_clear));
+        edNameTreatment.setText(getString(R.string.field_clear));
         edNameCustomer.requestFocus();
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -204,6 +212,31 @@ public class ScheduleFragment extends Fragment {
                     idTreatment = res.getInt("id");
                     loadTreatmentData(idTreatment);
                 }
+            }
+        }
+    }
+
+    private void loadSchedule(int id){
+        if(id > 0) {
+            Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
+            String selection = GoEsteticaContract.ScheduleEntry._ID + " = ?";
+            String[] selectionArguments = new String[]{String.valueOf(id)};
+            Cursor c = getContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
+            if (c != null) {
+                while (c.moveToNext()) {
+                    idCustomer = c.getInt(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID));
+                    idTreatment = c.getInt(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_TREATMENT_ID));
+                    edDtSchedule.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE)));
+                    edHrSchedule.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_START_HOUR)));
+                    edVlPrice.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));
+                    edQtSessions.setText(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_SESSIONS)));
+                    if(c.getString(c.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CONFIRMED)).equals("true")){
+                        chkConfirmed.setChecked(true);
+                    }
+                }
+                c.close();
+                loadCustomerData(idCustomer);
+                loadTreatmentData(idTreatment);
             }
         }
     }

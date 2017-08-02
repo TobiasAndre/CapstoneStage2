@@ -12,20 +12,14 @@
         android:layout_marginStart="10dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:labelFor="@+id/dt_schedule"
-            android:text="@string/schedule_date"/>
 
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/dt_schedule"
-            android:textSize="12sp"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:layout_marginStart="10dp"
+            android:hint="@string/date"
             android:inputType="date"/>
 
         <ImageButton
@@ -35,23 +29,25 @@
             android:layout_marginBottom="5dp"
             android:scaleType="centerCrop"
             android:background="@color/white"
+            android:contentDescription="@string/date"
             android:src="@mipmap/ic_calendar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:labelFor="@+id/hr_schedule"
-            android:layout_marginStart="10dp"
-            android:text="@string/schedule_time"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="12sp"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:id="@+id/hr_schedule"
+            android:hint="@string/schedule_time"
             android:inputType="time"/>
 
         <ImageButton
@@ -60,7 +56,9 @@
             android:id="@+id/btnSetTime"
             android:background="@color/white"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/schedule_time"
             android:src="@mipmap/ic_clock"/>
+
 
     </LinearLayout>
 
@@ -71,20 +69,12 @@
         android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:labelFor="@+id/nm_customer"
-            android:text="@string/schedule_customer"/>
-
-
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nm_customer"
-            android:textSize="12sp"
+            android:hint="@string/schedule_customer"
             android:inputType="textCapCharacters"/>
 
         <ImageButton
@@ -107,20 +97,12 @@
         android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:labelFor="@+id/nm_treatment"
-            android:text="@string/schedule_treatment"/>
-
-
         <EditText
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nm_treatment"
-            android:textSize="12sp"
+            android:hint="@string/schedule_treatment"
             android:inputType="textCapCharacters"/>
 
         <ImageButton
@@ -143,43 +125,30 @@
         android:layout_marginStart="10dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/vl_price"
-            android:textStyle="bold"
-            android:text="@string/schedule_price"/>
-
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/vl_price"
-            android:textSize="12sp"
-            android:textAlignment="textEnd"
+            android:textAlignment="textStart"
+            android:hint="@string/schedule_price"
             android:inputType="numberDecimal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/nr_sessions"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            android:text="@string/schedule_session"/>
 
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:id="@+id/nr_sessions"
-            android:textAlignment="center"
-            android:textSize="12sp"
+            android:textAlignment="textStart"
+            android:hint="@string/schedule_session"
             android:inputType="number"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="40dp"
         android:gravity="start"
         android:orientation="horizontal">
@@ -189,7 +158,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkbox_confirmed"
             android:layout_marginStart="5dp"
-            android:text="Confirmado?"/>
+            android:text="@string/confirmation"/>
 
         <ImageButton
             android:layout_width="wrap_content"

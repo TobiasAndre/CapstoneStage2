@@ -29,6 +29,13 @@
     <string name="confirmations">Confirmações:</string>
     <string name="time_available">Disponibilidade:</string>
     <string name="resume">Resumo Diário:</string>
+    <string name="field_clear"></string>
+    <string name="default_time_format">HH:mm</string>
+    <string name="default_date_format">dd/MM/yyyy</string>
+    <string name="default_value_format">0.00</string>
+    <string name="default_boolean_true">true</string>
+    <string name="default_boolean_false">false</string>
+    <string name="default_time_session">60</string>
     <!-- Import Contact -->
     <string name="contact_name">Nome:</string>
     <string name="contact_phone">Telefone:</string>
@@ -56,6 +63,8 @@
     <string name="schedule_session">Sessões :</string>
     <string name="btn_find_customer">Selecionar Cliente</string>
     <string name="btn_find_treatment">Selecionar Tratamento</string>
+    <string name="confirmation">Confirmado?</string>
+    <string name="run_report">Gerar Relatorio</string>
 
     <!-- Schedule List -->
     <string name="schedule_qt_session">Sessões : %s</string>
@@ -79,6 +88,7 @@
 
     <!-- Report -->
     <string name="report">Relatório:</string>
+    <string name="report_result">Resultado:</string>
     <string name="report_type"></string>
     <string name="result_type"></string>
     <string name="dt_ini">Data Inicial:</string>
