@@ -3,15 +3,12 @@ package com.tobiasandre.goestetica.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -68,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .addApi(AppIndex.API)
                 .build();
 
         btnLogin = (SignInButton)findViewById(R.id.btn_sign_in);
@@ -98,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 firebaseAuthWithGoogle(account);
 
             } else {
-                final LinearLayout MainLinearLayout = (LinearLayout) findViewById(R.id.activity_login);
+                final CoordinatorLayout MainLinearLayout = (CoordinatorLayout) findViewById(R.id.activity_login);
 
                 Snackbar snackbar = Snackbar.make(MainLinearLayout, getString(R.string.error_login), Snackbar.LENGTH_INDEFINITE);
                 snackbar.setAction(getString(R.string.retry), new View.OnClickListener() {

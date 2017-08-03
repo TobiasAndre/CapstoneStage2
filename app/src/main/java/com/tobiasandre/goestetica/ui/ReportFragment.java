@@ -71,7 +71,6 @@ public class ReportFragment extends Fragment implements
         tvDtInit = (TextView)rootView.findViewById(R.id.tv_dt_ini);
         tvDtFin = (TextView)rootView.findViewById(R.id.tv_dt_fin);
         spnReportType = (Spinner)rootView.findViewById(R.id.spnReportType);
-        spnResultType = (Spinner)rootView.findViewById(R.id.spnResultType);
         btnGenerate = (ImageButton)rootView.findViewById(R.id.btnRunReport);
         btnFindCustomer = (ImageButton)rootView.findViewById(R.id.btn_find_customer);
         btnFindTreatment = (ImageButton)rootView.findViewById(R.id.btn_find_treatment);

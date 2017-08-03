@@ -282,10 +282,10 @@ public class ScheduleFragment extends Fragment {
             edHrSchedule.setText(String.valueOf(new Date().getTime()));
         }
         if(edQtSessions.getText().toString().isEmpty()){
-            edQtSessions.setText("1");
+            edQtSessions.setText(R.string.qt_default);
         }
         if(edVlPrice.getText().toString().isEmpty()){
-            edVlPrice.setText("0,00");
+            edVlPrice.setText(getString(R.string.price_default));
         }
         if(edNameTreatment.getText().toString().isEmpty()){
             Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TypeSnackBar.ERROR).show();
