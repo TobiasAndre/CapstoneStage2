@@ -120,6 +120,8 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_customer_name"
+                android:enabled="false"
+                android:hint="@string/schedule_customer"
                 android:layout_marginStart="10dp"
                 android:textSize="12sp" />
 
@@ -173,6 +175,8 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_treatment_name"
+                android:enabled="false"
+                android:hint="@string/schedule_treatment"
                 android:textSize="12sp"
                 android:layout_marginStart="10dp" />
 

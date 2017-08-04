@@ -59,8 +59,8 @@
     <string name="find">Pesquisa</string>
     <string name="schedule_date">Data :</string>
     <string name="schedule_time">Hora :</string>
-    <string name="schedule_customer">Cliente :</string>
-    <string name="schedule_treatment">Tratamento :</string>
+    <string name="schedule_customer">Selecione o Cliente :</string>
+    <string name="schedule_treatment">Selecione o Tratamento :</string>
     <string name="schedule_price">Preço :</string>
     <string name="schedule_session">Sessões :</string>
     <string name="btn_find_customer">Selecionar Cliente</string>
@@ -97,6 +97,7 @@
     <string name="report_result">Resultado:</string>
     <string name="report_type"></string>
     <string name="result_type"></string>
+    <string name="graphics_item">Gráfico</string>
     <string name="dt_ini">Data Inicial:</string>
     <string name="dt_fin">Data Final</string>
 

@@ -70,21 +70,22 @@
 
 
         <EditText
+            android:id="@+id/nm_customer"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:id="@+id/nm_customer"
             android:hint="@string/schedule_customer"
-            android:inputType="textCapCharacters"/>
+            android:enabled="false"
+            android:inputType="textCapCharacters" />
 
         <ImageButton
+            android:id="@+id/btn_find_customer"
             android:layout_width="35dp"
             android:layout_height="32dp"
             android:layout_gravity="bottom"
-            android:id="@+id/btn_find_customer"
             android:background="@color/white"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/btn_find_customer"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_search" />
 
 
@@ -103,6 +104,7 @@
             android:layout_marginStart="10dp"
             android:id="@+id/nm_treatment"
             android:hint="@string/schedule_treatment"
+            android:enabled="false"
             android:inputType="textCapCharacters"/>
 
         <ImageButton

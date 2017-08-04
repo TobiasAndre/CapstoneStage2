@@ -43,16 +43,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <receiver android:name="com.tobiasandre.goestetica.widget.GoEsteticaWidgetProvider" >
+        <receiver android:name=".widget.GoEsteticaWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <service android:name=".widget.UpdateWidgetService"
+        <service
+            android:name=".widget.UpdateWidgetService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
@@ -70,8 +72,12 @@
         <activity
             android:name=".ui.CustomerListActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ui.TreatmentListActivity" />
-        <activity android:name=".ui.SyncActivity"></activity>
+        <activity android:name=".ui.TreatmentListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SyncActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.GraphicsActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

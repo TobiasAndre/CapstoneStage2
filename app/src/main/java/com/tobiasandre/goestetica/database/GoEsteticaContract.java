@@ -109,7 +109,16 @@ public class GoEsteticaContract {
         public static final String COLUMN_SCHEDULE_CONFIRMED = "confirmed";
         public static final String COLUMN_SCHEDULE_SESSION_MINUTES = "session_minutes";
 
-
+        public static final String[] SCHEDULE_COLUMNS = {
+                COLUMN_SCHEDULE_CUSTOMER_ID,
+                COLUMN_SCHEDULE_TREATMENT_ID,
+                COLUMN_SCHEDULE_SESSIONS,
+                COLUMN_SCHEDULE_PRICE,
+                COLUMN_SCHEDULE_DATE,
+                COLUMN_SCHEDULE_START_HOUR,
+                COLUMN_SCHEDULE_SESSION_MINUTES,
+                COLUMN_SCHEDULE_CONFIRMED
+        };
 
     }
 

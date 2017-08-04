@@ -175,7 +175,22 @@ public class ReportFragment extends Fragment implements
         Bundle bundle = new Bundle();
         bundle.putString("filter",filter);
 
-        getActivity().getSupportLoaderManager().restartLoader(ID_SCHEDULE_LOADER, bundle, this);
+        if(spnReportType.getSelectedItem().toString().equals(getString(R.string.graphics_item))){
+
+            Bundle parameters = new Bundle();
+            parameters.putInt("idCustomer",idCustomer);
+            parameters.putInt("idTreatment",idTreatment);
+            parameters.putString("dtInit",tvDtInit.getText().toString());
+            parameters.putString("dtFin",tvDtFin.getText().toString());
+
+            Intent intent = new Intent(rootView.getContext(),GraphicsActivity.class);
+            intent.putExtras(parameters);
+            startActivity(intent);
+
+        }else {
+
+            getActivity().getSupportLoaderManager().restartLoader(ID_SCHEDULE_LOADER, bundle, this);
+        }
 
     }
 
