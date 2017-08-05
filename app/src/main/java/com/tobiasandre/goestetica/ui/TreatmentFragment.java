@@ -29,11 +29,11 @@ import com.tobiasandre.goestetica.utils.Util;
 public class TreatmentFragment extends Fragment {
 
     private final String TAG = TreatmentFragment.class.getSimpleName();
-    View rootView;
-    Integer idTreatment=-1;
-    Spinner typeTreatment;
-    EditText edName,edDescription,edPrice,edSessions,edDuration;
-    ImageButton btnSave,btnFindTreatment;
+    private View rootView;
+    private Integer idTreatment=-1;
+    private Spinner typeTreatment;
+    private EditText edName,edDescription,edPrice,edSessions,edDuration;
+    private ImageButton btnSave,btnFindTreatment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,10 +124,10 @@ public class TreatmentFragment extends Fragment {
 
     private Boolean verifyRequired(){
         if(edPrice.getText().toString().isEmpty()){
-            edPrice.setText("0,00");
+            edPrice.setText(getString(R.string.price_default));
         }
         if(edSessions.getText().toString().isEmpty()){
-            edSessions.setText("1");
+            edSessions.setText(getString(R.string.qt_default));
         }
         if(edName.getText().toString().isEmpty()){
             Util.makeSnackbar(rootView,getString(R.string.treatment_name_required), Snackbar.LENGTH_LONG, TypeSnackBar.ERROR).show();

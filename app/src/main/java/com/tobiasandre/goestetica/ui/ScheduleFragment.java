@@ -26,7 +26,6 @@ import com.tobiasandre.goestetica.utils.TypeSnackBar;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,12 +36,12 @@ import java.util.Date;
 
 public class ScheduleFragment extends Fragment {
 
-    final static String TAG = ScheduleFragment.class.getSimpleName();
-    View rootView;
-    EditText edDtSchedule,edHrSchedule,edNameCustomer,edNameTreatment,edVlPrice,edQtSessions;
-    ImageButton btFindCustomer,btFindTreatment,btSave,btnSetDate,btnSetTime;
-    Integer idCustomer,idTreatment,idSchedule;
-    CheckBox chkConfirmed;
+    private final static String TAG = ScheduleFragment.class.getSimpleName();
+    private View rootView;
+    private EditText edDtSchedule,edHrSchedule,edNameCustomer,edNameTreatment,edVlPrice,edQtSessions;
+    private ImageButton btFindCustomer,btFindTreatment,btSave,btnSetDate,btnSetTime;
+    private Integer idCustomer,idTreatment,idSchedule;
+    private CheckBox chkConfirmed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -307,13 +306,11 @@ public class ScheduleFragment extends Fragment {
                               int dayOfMonth) {
             // TODO Auto-generated method stub
             DecimalFormat format = new DecimalFormat("00");
-            int mYear = year;
-            int mMonth = monthOfYear;
-            int mDay = dayOfMonth;
+
             edDtSchedule.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
-                    .append(mYear).append(" "));
+                    .append(format.format(dayOfMonth)).append("/").append(format.format(monthOfYear + 1)).append("/")
+                    .append(year).append(" "));
 
             System.out.println(edDtSchedule.getText().toString());
         }

@@ -11,7 +11,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +23,10 @@ import android.widget.TextView;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.Adapter.ReportAdapter;
-import com.tobiasandre.goestetica.ui.Adapter.ScheduleAdapter;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by TobiasAndre on 22/06/2017.
@@ -40,15 +37,15 @@ public class ReportFragment extends Fragment implements
         ReportAdapter.Callbacks{
 
     private static String TAG = ReportFragment.class.getSimpleName();
-    public static final int ID_SCHEDULE_LOADER = 102;
+    private static final int ID_SCHEDULE_LOADER = 102;
     private int mPosition = RecyclerView.NO_POSITION;
-    Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
-    View rootView;
-    int idCustomer,idTreatment;
-    TextView tvDtInit,tvDtFin;
-    Spinner spnReportType,spnResultType;
-    ImageButton btnGenerate,btnFindTreatment,btnFindCustomer,btnSetDateIni,btnSetDateFin;
-    EditText edCustomerName,edTreatmentName;
+    private final Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
+    private View rootView;
+    private int idCustomer,idTreatment;
+    private TextView tvDtInit,tvDtFin;
+    private Spinner spnReportType;
+    private ImageButton btnGenerate,btnFindTreatment,btnFindCustomer,btnSetDateIni,btnSetDateFin;
+    private EditText edCustomerName,edTreatmentName;
     private RecyclerView mRecyclerView;
     private ReportAdapter mAdapter;
 
@@ -291,13 +288,11 @@ public class ReportFragment extends Fragment implements
                               int dayOfMonth) {
             // TODO Auto-generated method stub
             DecimalFormat format = new DecimalFormat("00");
-            int mYear = year;
-            int mMonth = monthOfYear;
-            int mDay = dayOfMonth;
+
             tvDtInit.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
-                    .append(mYear).append(" "));
+                    .append(format.format(dayOfMonth)).append("/").append(format.format(monthOfYear + 1)).append("/")
+                    .append(year).append(" "));
 
             System.out.println(tvDtInit.getText().toString());
 
@@ -311,13 +306,11 @@ public class ReportFragment extends Fragment implements
                               int dayOfMonth) {
             // TODO Auto-generated method stub
             DecimalFormat format = new DecimalFormat("00");
-            int mYear = year;
-            int mMonth = monthOfYear;
-            int mDay = dayOfMonth;
+
             tvDtFin.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
-                    .append(mYear).append(" "));
+                    .append(format.format(dayOfMonth)).append("/").append(format.format(monthOfYear + 1)).append("/")
+                    .append(year).append(" "));
 
             System.out.println(tvDtFin.getText().toString());
 

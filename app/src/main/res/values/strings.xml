@@ -10,7 +10,7 @@
     <string name="action_option_selection">Selecione a opção desejada</string>
     <string name="action_confirmation">Confirmado</string>
     <string name="wellcome">Seja Bem Vindo, %s!</string>
-    <string name="take_schedule">Adicione um Agendamento...</string>
+    <string name="take_schedule">Adicione um Agendamento</string>
     <string name="retry">Tentar Novamente</string>
     <string name="error_login">Erro ao Efetuar o Login:</string>
     <string name="read_contacts">Lendo Lista de Contatos</string>
@@ -23,6 +23,7 @@
     <string name="save_sucess">Registro Salvo com Sucesso!</string>
     <string name="name">Nome :</string>
     <string name="type">Tipo:</string>
+    <string name="image">Imagem</string>
     <string name="action_image_selection">Selecionar Imagem</string>
     <string name="action_take_picture">Tirar Foto</string>
     <string name="schedulings">Agendamentos:</string>
@@ -102,9 +103,9 @@
     <string name="dt_fin">Data Final</string>
 
     <!-- Sync -->
-    <string name="init_sync">Sincronizando...AGUARDE!</string>
-    <string name="sync_types">Sincronizando Tipos de Tratamento...AGUARDE!</string>
-    <string name="sync_treatments">Sincronizando Tratamentos...AGUARDE!</string>
+    <string name="init_sync">Sincronizando,AGUARDE!</string>
+    <string name="sync_types">Sincronizando Tipos de Tratamento,AGUARDE!</string>
+    <string name="sync_treatments">Sincronizando Tratamentos,AGUARDE!</string>
     <string name="sync_finish">Concluído!</string>
 
     <!-- SnackBar -->

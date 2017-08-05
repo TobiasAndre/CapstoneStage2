@@ -32,8 +32,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final String TAG = LoginActivity.class.toString();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    private SignInButton btnLogin;
-    View mRootView;
+    private View mRootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
 
-        btnLogin = (SignInButton)findViewById(R.id.btn_sign_in);
+        SignInButton btnLogin = (SignInButton)findViewById(R.id.btn_sign_in);
         if(btnLogin!=null) {
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override

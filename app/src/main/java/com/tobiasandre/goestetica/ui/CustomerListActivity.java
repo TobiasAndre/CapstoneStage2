@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -28,22 +27,22 @@ public class CustomerListActivity extends AppCompatActivity implements
         CustomerAdapter.Callbacks {
 
     public static final String TAG = CustomerListActivity.class.getSimpleName();
-    public static final int ID_CUSTOMER_LOADER = 44;
+    private static final int ID_CUSTOMER_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
-    Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
-    SearchView searchView;
+    private final Uri contentUri = GoEsteticaContract.CustomerEntry.CONTENT_URI;
+    private SearchView searchView;
 
     private CustomerAdapter mCustomerAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
-    private FloatingActionButton fbAddCustomer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
 
-        fbAddCustomer = (FloatingActionButton)findViewById(R.id.fab_add_customer);
+        FloatingActionButton fbAddCustomer = (FloatingActionButton)findViewById(R.id.fab_add_customer);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_customers);
 

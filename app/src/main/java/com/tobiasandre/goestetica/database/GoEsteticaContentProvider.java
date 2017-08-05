@@ -15,15 +15,15 @@ import android.support.annotation.Nullable;
 
 public class GoEsteticaContentProvider extends ContentProvider {
 
-    public static final int CODE_CUSTOMER = 100;
-    public static final int CODE_TREATMENT = 101;
-    public static final int CODE_SCHEDULE = 102;
-    public static final int CODE_TREATMENT_TYPE = 103;
+    private static final int CODE_CUSTOMER = 100;
+    private static final int CODE_TREATMENT = 101;
+    private static final int CODE_SCHEDULE = 102;
+    private static final int CODE_TREATMENT_TYPE = 103;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private GoEsteticaDBHelper mOpenHelper;
 
-    public static UriMatcher buildUriMatcher() {
+    private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 
         final String authority = GoEsteticaContract.CONTENT_AUTHORITY;

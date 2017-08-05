@@ -17,9 +17,9 @@ import com.tobiasandre.goestetica.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
-    Context mContext;
-    int layoutResourceId;
-    DataModel data[] = null;
+    private final Context mContext;
+    private final int layoutResourceId;
+    private DataModel data[] = null;
 
     public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
 

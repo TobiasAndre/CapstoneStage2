@@ -1,6 +1,5 @@
 package com.tobiasandre.goestetica.widget;
 
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -48,14 +47,8 @@ public class UpdateWidgetService extends RemoteViewsService {
         Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
         DecimalFormat decimalFormat = new DecimalFormat("00");
 
-
-        int mDay = Calendar.getInstance().DAY_OF_MONTH-1;
-        int mMonth = Calendar.getInstance().MONTH;
-        int mYear = Calendar.getInstance().YEAR;
-
-
         try {
-            String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate().replace("/", "-").trim() + "' and '" + decimalFormat.format(mDay + 1) + "-" + decimalFormat.format(mMonth + 1) + "-" + mYear + "'";
+            String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate().replace("/", "-").trim() + "' and '" + decimalFormat.format(Calendar.getInstance().DAY_OF_MONTH) + "-" + decimalFormat.format(Calendar.getInstance().MONTH + 1) + "-" + Calendar.getInstance().YEAR + "'";
             String[] selectionArguments = new String[]{String.valueOf("")};
             Cursor c = getBaseContext().getContentResolver().query(contentUri, null, selection, selectionArguments, null);
             if (c != null) {
@@ -81,7 +74,7 @@ public class UpdateWidgetService extends RemoteViewsService {
 }
 
 class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private Context mContext;
+    private final Context mContext;
 
     public StackRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;

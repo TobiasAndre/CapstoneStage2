@@ -26,9 +26,9 @@ import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
 
 public class GraphicsActivity extends AppCompatActivity {
 
-    PieChart mChart;
-    ArrayList<PieEntry> entries;
-    ArrayList<ResultItem> resultArray;
+    private PieChart mChart;
+    private ArrayList<PieEntry> entries;
+    private ArrayList<ResultItem> resultArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

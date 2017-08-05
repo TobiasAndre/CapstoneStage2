@@ -18,9 +18,9 @@ import com.tobiasandre.goestetica.sync.SyncService;
 
 public class SyncActivity extends AppCompatActivity implements SyncResultReceiver.Receiver {
 
-    private SyncResultReceiver mReceiver;
-    ProgressBar mProgressao;
-    TextView mTextoProgressao;
+
+    private ProgressBar mProgressao;
+    private TextView mTextoProgressao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class SyncActivity extends AppCompatActivity implements SyncResultReceive
                 .asGif()
                 .into(imgloading);
 
-        mReceiver = new SyncResultReceiver(new Handler());
+        SyncResultReceiver mReceiver = new SyncResultReceiver(new Handler());
         mReceiver.setReceiver(this);
 
 

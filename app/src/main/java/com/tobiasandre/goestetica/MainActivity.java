@@ -1,11 +1,9 @@
 package com.tobiasandre.goestetica;
 
-import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -22,14 +20,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.ui.CustomerFragment;
 import com.tobiasandre.goestetica.ui.HomeFragment;
-import com.tobiasandre.goestetica.ui.ImportContactsActivity;
 import com.tobiasandre.goestetica.ui.LoginActivity;
 import com.tobiasandre.goestetica.ui.ReportFragment;
 import com.tobiasandre.goestetica.ui.ScheduleFragment;
@@ -43,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_STORAGE_WRITE_REQUEST_CODE = 102;
     final private String TAG = MainActivity.class.getSimpleName();
-    private View mView;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private ListView mDrawerList;
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private String[] mNavigationDrawerItemTitles;
-    private CharSequence mTitle;
-    android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
+
+    private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
 
     @Override
@@ -77,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     MY_STORAGE_WRITE_REQUEST_CODE);
         }
 
-        mView = (View)findViewById(R.id.drawer_layout);
+        View mView = (View)findViewById(R.id.drawer_layout);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -118,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
         setupDrawerToggle();
     }
 
@@ -154,12 +150,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(title);
     }
 
 
-    void setupDrawerToggle(){
+    private void setupDrawerToggle(){
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name, R.string.app_name);
         mDrawerToggle.syncState();
     }
@@ -211,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void setupToolbar(){
+    private void setupToolbar(){
         try {
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);

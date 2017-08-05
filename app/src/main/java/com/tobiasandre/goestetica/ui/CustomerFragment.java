@@ -50,21 +50,21 @@ import static android.app.Activity.RESULT_OK;
 
 public class CustomerFragment extends Fragment {
 
-    private static String TAG = CustomerFragment.class.getSimpleName();
+    private static final String TAG = CustomerFragment.class.getSimpleName();
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
 
-    public  static final int RequestPermissionCode  = 1 ;
+    private static final int RequestPermissionCode  = 1 ;
     private int idCustomer=-1;
-    static final int REQUEST_TAKE_PHOTO = 1;
-    View rootView;
-    EditText edCustomerName,edCustomerPhone,edCustomerCellPhone,edCustomerEmail,edCustomerAddress;
-    ImageButton saveButton,findCustomerButton;
-    Spinner spnDefaultPaymentType;
-    ImageView customerPhoto;
-    FloatingActionButton btnAddPhoto;
-    Uri uri;
-    Intent GalIntent, CropIntent ;
+    private static final int REQUEST_TAKE_PHOTO = 1;
+    private View rootView;
+    private EditText edCustomerName,edCustomerPhone,edCustomerCellPhone,edCustomerEmail,edCustomerAddress;
+    private ImageButton saveButton,findCustomerButton;
+    private Spinner spnDefaultPaymentType;
+    private ImageView customerPhoto;
+    private FloatingActionButton btnAddPhoto;
+    private Uri uri;
+    private Intent GalIntent, CropIntent ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -347,7 +347,7 @@ public class CustomerFragment extends Fragment {
         idCustomer = -1;
     }
 
-    public void EnableRuntimePermission(){
+    private void EnableRuntimePermission(){
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                 Manifest.permission.CAMERA))
@@ -363,7 +363,7 @@ public class CustomerFragment extends Fragment {
         }
     }
 
-    public void GetImageFromGallery(){
+    private void GetImageFromGallery(){
 
         GalIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -372,7 +372,7 @@ public class CustomerFragment extends Fragment {
 
     }
 
-    public void ClickImageFromCamera() {
+    private void ClickImageFromCamera() {
         dispatchTakePictureIntent();
     }
 
@@ -420,7 +420,7 @@ public class CustomerFragment extends Fragment {
         }
     }
 
-    public void ImageCropFunction() {
+    private void ImageCropFunction() {
 
         // Image Crop Code
         try {
@@ -438,11 +438,11 @@ public class CustomerFragment extends Fragment {
             startActivityForResult(CropIntent, 1);
 
         } catch (ActivityNotFoundException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
-    public void customDialog(){
+    private void customDialog(){
         // custom dialog
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.custom_image_dialog);

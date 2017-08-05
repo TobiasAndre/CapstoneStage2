@@ -1,7 +1,6 @@
 package com.tobiasandre.goestetica;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class ImportContactsAdapter extends RecyclerView.Adapter<ImportContactsAd
 
     private final static String TAG = ImportContactsAdapter.class.getSimpleName();
 
-    private List<Contact> mContacts;
+    private final List<Contact> mContacts;
     private final Callbacks mCallbacks;
     private Context mContext;
 
@@ -87,8 +86,8 @@ public class ImportContactsAdapter extends RecyclerView.Adapter<ImportContactsAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        TextView mName,mPhone,mEmail;
-        ImageView mFoto,mChecked;
+        final TextView mName,mPhone,mEmail;
+        final ImageView mFoto,mChecked;
 
         public Contact mContact;
 

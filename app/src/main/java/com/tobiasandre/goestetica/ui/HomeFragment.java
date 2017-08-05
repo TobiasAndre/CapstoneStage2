@@ -12,7 +12,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,16 +41,16 @@ public class HomeFragment extends Fragment implements
 
 
     public static final String TAG = HomeFragment.class.getSimpleName();
-    Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
+    private final Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
     public static final int ID_SCHEDULE_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
-    private ImageButton btnSetDate;
-    TextView tvTakeSchedule,tvCurrentDate;
-    ScheduleAdapter mAdapter;
-    FloatingActionButton btnAdd;
-    DecimalFormat format;
+
+    private TextView tvTakeSchedule,tvCurrentDate;
+    private ScheduleAdapter mAdapter;
+    private FloatingActionButton btnAdd;
+    private DecimalFormat format;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class HomeFragment extends Fragment implements
         btnAdd = (FloatingActionButton)rootView.findViewById(R.id.fab_add_scheduling);
         tvTakeSchedule = (TextView)rootView.findViewById(R.id.tv_take_schedule);
         tvCurrentDate = (TextView)rootView.findViewById(R.id.tv_current_date);
-        btnSetDate = (ImageButton) rootView.findViewById(R.id.btnSetDate);
+        ImageButton btnSetDate = (ImageButton) rootView.findViewById(R.id.btnSetDate);
 
         tvCurrentDate.setText(Util.getStringDate().replace("-","/"));
 
@@ -218,16 +217,14 @@ public class HomeFragment extends Fragment implements
                               int dayOfMonth) {
             // TODO Auto-generated method stub
             DecimalFormat format = new DecimalFormat("00");
-            int mYear = year;
-            int mMonth = monthOfYear;
-            int mDay = dayOfMonth;
+
             tvCurrentDate.setText(new StringBuilder()
                     // Month is 0 based so add 1
-                    .append(format.format(mDay)).append("/").append(format.format(mMonth + 1)).append("/")
-                    .append(mYear).append(" "));
+                    .append(format.format(dayOfMonth)).append("/").append(format.format(monthOfYear + 1)).append("/")
+                    .append(year).append(" "));
 
             System.out.println(tvCurrentDate.getText().toString());
-            String vWhere = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+tvCurrentDate.getText().toString().replace("/","-").trim()+"' and '"+format.format(mDay+1)+"-"+format.format(mMonth+1)+"-"+mYear+"'";
+            String vWhere = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" between '"+tvCurrentDate.getText().toString().replace("/","-").trim()+"' and '"+format.format(dayOfMonth+1)+"-"+format.format(monthOfYear+1)+"-"+year+"'";
 
             restartLoader(vWhere);
 

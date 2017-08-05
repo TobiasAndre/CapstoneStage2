@@ -21,7 +21,7 @@ public class SyncResultReceiver extends ResultReceiver {
     }
 
     public interface Receiver {
-        public void onReceiveResult(int resultCode, Bundle resultData);
+        void onReceiveResult(int resultCode, Bundle resultData);
     }
 
     @Override

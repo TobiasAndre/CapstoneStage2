@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -28,21 +27,21 @@ public class TreatmentListActivity extends AppCompatActivity implements
         TreatmentAdapter.Callbacks {
 
     public static final String TAG = TreatmentListActivity.class.getSimpleName();
-    public static final int ID_TREATMENT_LOADER = 44;
+    private static final int ID_TREATMENT_LOADER = 44;
     private int mPosition = RecyclerView.NO_POSITION;
-    Uri contentUri = GoEsteticaContract.TreatmentEntry.CONTENT_URI;
+    private final Uri contentUri = GoEsteticaContract.TreatmentEntry.CONTENT_URI;
     private TreatmentAdapter mTreatmentAdapter;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
-    private FloatingActionButton fbAddTreatment;
-    SearchView searchView;
+
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treatment_list);
 
-        fbAddTreatment = (FloatingActionButton)findViewById(R.id.fab_add_treatment);
+        FloatingActionButton fbAddTreatment = (FloatingActionButton)findViewById(R.id.fab_add_treatment);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_treatments);
 

@@ -6,8 +6,8 @@ package com.tobiasandre.goestetica.ui.drawer;
 
 public class DataModel {
 
-    public int icon;
-    public String name;
+    public final int icon;
+    public final String name;
 
     // Constructor.
     public DataModel(int icon, String name) {

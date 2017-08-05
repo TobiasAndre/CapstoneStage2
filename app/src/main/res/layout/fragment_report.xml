@@ -42,6 +42,7 @@
             android:layout_marginStart="10dp"
             android:background="@color/white"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/dt_ini"
             android:src="@mipmap/ic_calendar" />
 
     </LinearLayout>
@@ -83,6 +84,7 @@
             android:layout_marginStart="10dp"
             android:background="@color/white"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/dt_fin"
             android:src="@mipmap/ic_calendar" />
 
     </LinearLayout>
@@ -242,6 +244,7 @@
             android:id="@+id/btnRunReport"
             android:scaleType="centerCrop"
             android:background="@color/white"
+            android:contentDescription="@string/run_report"
             android:src="@mipmap/ic_run"/>
 
     </LinearLayout>

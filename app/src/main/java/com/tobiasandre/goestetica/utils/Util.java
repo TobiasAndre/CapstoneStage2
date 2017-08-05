@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by TobiasAndre on 22/06/2017.

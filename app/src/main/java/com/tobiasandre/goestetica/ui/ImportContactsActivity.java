@@ -26,12 +26,12 @@ import java.util.ArrayList;
 public class ImportContactsActivity extends AppCompatActivity implements ImportContactsAdapter.Callbacks{
 
     private static final String TAG = ImportContactsActivity.class.getSimpleName();
-    ArrayList<Contact> mContacts;
+    private ArrayList<Contact> mContacts;
     private ProgressDialog pDialog;
-    Cursor cursor;
-    int counter;
-    RecyclerView mRecyclerView;
-    ImportContactsAdapter mAdapter;
+    private Cursor cursor;
+    private int counter;
+    private RecyclerView mRecyclerView;
+    private ImportContactsAdapter mAdapter;
     private Handler updateBarHandler;
 
     @Override
@@ -66,7 +66,7 @@ public class ImportContactsActivity extends AppCompatActivity implements ImportC
     }
 
 
-    public void getContacts() {
+    private void getContacts() {
 
         try {
             String phoneNumber = null;
@@ -184,7 +184,7 @@ public class ImportContactsActivity extends AppCompatActivity implements ImportC
 
     }
 
-    public InputStream openPhoto(long contactId) {
+    private InputStream openPhoto(long contactId) {
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
         Cursor cursor = getContentResolver().query(photoUri,

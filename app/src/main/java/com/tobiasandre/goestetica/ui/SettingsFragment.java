@@ -2,7 +2,6 @@ package com.tobiasandre.goestetica.ui;
 
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import com.tobiasandre.goestetica.R;
