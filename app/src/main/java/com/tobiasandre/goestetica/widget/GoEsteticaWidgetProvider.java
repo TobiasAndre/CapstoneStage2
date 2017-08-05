@@ -41,8 +41,6 @@ public class GoEsteticaWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        System.out.println("=============== WIDGET onUpdate==================");
-
 
         final AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         final Intent i = new Intent(context, UpdateWidgetService.class);
@@ -50,7 +48,6 @@ public class GoEsteticaWidgetProvider extends AppWidgetProvider {
             service = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
         }
 
-        System.out.println("=============== WIDGET setRepeating==================");
         manager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 3000, service);
 
     }

@@ -18,6 +18,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.tobiasandre.goestetica.R;
 import com.tobiasandre.goestetica.database.GoEsteticaContract;
+import com.tobiasandre.goestetica.database.model.ResultItem;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
     PieChart mChart;
     ArrayList<PieEntry> entries;
+    ArrayList<ResultItem> resultArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,26 +93,44 @@ public class GraphicsActivity extends AppCompatActivity {
 
         String dataInicial = "";
         String dataFinal = "";
-        Integer idCustomer = 0;
-        Integer idTreatment = 0;
         if(bundle!=null){
             dataInicial = bundle.getString("dtInit");
             dataFinal = bundle.getString("dtFin");
-            idCustomer = bundle.getInt("idCustomer");
-            idTreatment = bundle.getInt("idTreatment");
         }
-        entries = new ArrayList<PieEntry>();
+        String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " >= '"+dataInicial+"' and "+
+                GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE+" <= '"+dataFinal+"'";
 
-        Cursor cursor = getContentResolver().query(GoEsteticaContract.ScheduleEntry.CONTENT_URI,null, null, null, null);
+        entries = new ArrayList<PieEntry>();
+        resultArray = new ArrayList<>();
+
+        Cursor cursor = getContentResolver().query(GoEsteticaContract.ScheduleEntry.CONTENT_URI, null, selection, null, null);
         try {
             while (cursor.moveToNext()) {
 
-                entries.add(new PieEntry((float) cursor.getDouble(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)),
-                        getCustomer(cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID)))));
+                if(resultArray.size()==0){
+                    resultArray.add(new ResultItem(cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID)),
+                            null,cursor.getDouble(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE))));
+                }else{
+                    for(int i=0;i<resultArray.size();i++){
+                        if(resultArray.get(i).getIdResult()==cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID))){
+                            resultArray.get(i).setDsResult(getCustomer(cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID))));
+                            resultArray.get(i).setVlResult(resultArray.get(i).getVlResult()+cursor.getDouble(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE)));
+                        }else{
+                            resultArray.add(new ResultItem(cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID)),
+                                    getCustomer(cursor.getInt(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_CUSTOMER_ID))),
+                                    cursor.getDouble(cursor.getColumnIndexOrThrow(GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_PRICE))));
+                        }
+                    }
+                }
             }
         } finally {
             cursor.close();
         }
+
+        for(int i=0;i<resultArray.size();i++) {
+            entries.add(new PieEntry(Float.valueOf(resultArray.get(i).getVlResult().toString()),resultArray.get(i).getDsResult()));
+        }
+
 
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setSliceSpace(5);
@@ -162,5 +182,7 @@ public class GraphicsActivity extends AppCompatActivity {
         }
         return nmCustomer;
     }
+
+
 
 }

@@ -17,6 +17,7 @@ import com.tobiasandre.goestetica.database.GoEsteticaContract;
 import com.tobiasandre.goestetica.utils.Util;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 /**
  * Created by TobiasAndre on 24/07/2017.
@@ -35,23 +36,24 @@ public class UpdateWidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        System.out.println("=============== WIDGET onGetViewFactory==================");
         return new StackRemoteViewsFactory(this.getApplicationContext(), intent);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        System.out.println("=============== WIDGET onStartCommand==================");
-
         DecimalFormat formato = new DecimalFormat("00");
 
         RemoteViews view = new RemoteViews(getPackageName(), R.layout.widget_layout);
         Uri contentUri = GoEsteticaContract.ScheduleEntry.CONTENT_URI;
         DecimalFormat decimalFormat = new DecimalFormat("00");
-        int mDay = 31;
-        int mMonth = 7;
-        int mYear = 2017;
+
+
+        int mDay = Calendar.getInstance().DAY_OF_MONTH-1;
+        int mMonth = Calendar.getInstance().MONTH;
+        int mYear = Calendar.getInstance().YEAR;
+
+
         try {
             String selection = GoEsteticaContract.ScheduleEntry.COLUMN_SCHEDULE_DATE + " between '" + Util.getStringDate().replace("/", "-").trim() + "' and '" + decimalFormat.format(mDay + 1) + "-" + decimalFormat.format(mMonth + 1) + "-" + mYear + "'";
             String[] selectionArguments = new String[]{String.valueOf("")};
@@ -73,7 +75,6 @@ public class UpdateWidgetService extends RemoteViewsService {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         manager.updateAppWidget(theWidget, view);
 
-        System.out.println("=============== WIDGET onStartCommand return ==================");
 
         return super.onStartCommand(intent, flags, startId);
     }
